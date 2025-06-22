@@ -1,0 +1,91 @@
+{
+  "kind": "collectionType",
+  "collectionName": "utilisateurs",
+  "info": {
+    "singularName": "utilisateur",
+    "pluralName": "utilisateurs",
+    "displayName": "Utilisateur",
+    "description": "Gestion des utilisateurs de la boulangerie"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "nom": {
+      "type": "string",
+      "required": true
+    },
+    "prenom": {
+      "type": "string",
+      "required": true
+    },
+    "telephone": {
+      "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "enumeration",
+      "enum": ["CLIENT", "EMPLOYE", "ADMIN"],
+      "default": "CLIENT",
+      "required": true
+    },
+    "statut": {
+      "type": "enumeration",
+      "enum": ["ACTIF", "INACTIF", "SUSPENDU"],
+      "default": "ACTIF",
+      "required": true
+    },
+    "allergies": {
+      "type": "json",
+      "default": []
+    },
+    "regimeAlimentaire": {
+      "type": "enumeration",
+      "enum": ["OMNIVORE", "VEGETARIEN", "VEGAN", "SANS_GLUTEN", "HALAL", "CASHER"]
+    },
+    "preferencesNotification": {
+      "type": "json",
+      "default": {
+        "email": true,
+        "sms": false,
+        "push": false,
+        "commande": true,
+        "promotions": false,
+        "nouveautes": false
+      }
+    },
+    "languePreferee": {
+      "type": "string",
+      "default": "fr"
+    },
+    "adressesSauvegardees": {
+      "type": "json",
+      "default": []
+    },
+    "commandes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commande.commande",
+      "mappedBy": "utilisateur"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "utilisateur"
+    }
+  }
+}

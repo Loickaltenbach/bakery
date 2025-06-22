@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "collectionName": "produits",
+  "info": {
+    "singularName": "produit",
+    "pluralName": "produits",
+    "displayName": "Produit",
+    "description": "Gestion des produits de la boulangerie"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "prix": {
+      "type": "decimal",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "disponible": {
+      "type": "boolean",
+      "default": true
+    },
+    "stock": {
+      "type": "integer",
+      "default": 0
+    },
+    "allergenes": {
+      "type": "json",
+      "default": []
+    },
+    "regimesCompatibles": {
+      "type": "json",
+      "default": []
+    },
+    "tempsPreparation": {
+      "type": "integer",
+      "default": 30
+    },
+    "poids": {
+      "type": "decimal"
+    },
+    "unite": {
+      "type": "enumeration",
+      "enum": ["piece", "gramme", "kilogramme", "litre"],
+      "default": "piece"
+    },
+    "categorie": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::categorie.categorie",
+      "inversedBy": "produits"
+    }
+  }
+}

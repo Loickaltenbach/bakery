@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "singularName": "categorie",
+    "pluralName": "categories",
+    "displayName": "Catégorie",
+    "description": "Catégories de produits de boulangerie"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "nom",
+      "required": true
+    },
+    "couleur": {
+      "type": "string",
+      "maxLength": 7,
+      "regex": "^#[0-9A-Fa-f]{6}$",
+      "default": "#3b82f6"
+    },
+    "icone": {
+      "type": "string",
+      "maxLength": 50,
+      "default": "package"
+    },
+    "ordre": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "produits": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::produit.produit",
+      "mappedBy": "categorie"
+    }
+  }
+}

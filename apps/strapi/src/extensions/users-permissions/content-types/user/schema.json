@@ -1,0 +1,10 @@
+{
+  "attributes": {
+    "utilisateur": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::utilisateur.utilisateur",
+      "inversedBy": "users_permissions_user"
+    }
+  }
+}

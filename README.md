@@ -1,12 +1,54 @@
-# shadcn/ui monorepo template
+# Boulangerie - Monorepo Next.js + Strapi
 
-This template is for creating a monorepo with shadcn/ui.
+## 🏗️ Architecture
 
-## Usage
+Ce monorepo contient :
+- **`apps/web`** : Application Next.js 15 avec interface produits
+- **`apps/strapi`** : CMS Strapi pour la gestion des produits
+- **`packages/ui`** : Composants UI partagés basés sur ShadCN
+- **`packages/eslint-config`** : Configuration ESLint partagée
+- **`packages/typescript-config`** : Configuration TypeScript partagée
 
+## 🚀 Démarrage rapide
+
+### 1. Installation des dépendances
 ```bash
-pnpm dlx shadcn@latest init
+pnpm install
 ```
+
+### 2. Lancement des applications
+
+#### Lancer Next.js seulement (avec données de test)
+```bash
+pnpm run dev:web
+```
+→ Interface disponible sur http://localhost:3000
+
+#### Lancer Strapi seulement
+```bash
+pnpm run dev:strapi
+```
+→ Admin Strapi disponible sur http://localhost:1337/admin
+
+#### Lancer les deux en parallèle
+```bash
+pnpm run dev:all
+```
+
+## 📱 Fonctionnalités
+
+### Interface Next.js (Port 3000)
+- ✅ Grille de produits responsive
+- ✅ Cartes produits avec ShadCN UI
+- ✅ Données de test intégrées (mode démo)
+- ✅ Gestion d'état de chargement
+- ✅ Connexion API Strapi automatique
+
+### CMS Strapi (Port 1337)
+- ✅ Modèle Produit (nom, description, prix, image)
+- ✅ API REST publique
+- ✅ Upload d'images
+- ✅ CORS configuré pour Next.js
 
 ## Adding components
 

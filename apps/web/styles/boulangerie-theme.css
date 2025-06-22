@@ -1,0 +1,143 @@
+/* Thème Boulangerie Alsacienne - Bordeaux et Or */
+:root {
+  /* Couleurs principales */
+  --boulangerie-bordeaux: #722f37;
+  --boulangerie-bordeaux-light: #8b4a52;
+  --boulangerie-bordeaux-dark: #5a252a;
+  --boulangerie-or: #d4af37;
+  --boulangerie-or-light: #e6c558;
+  --boulangerie-or-dark: #b8941f;
+  
+  /* Couleurs de support */
+  --boulangerie-cream: #faf7f0;
+  --boulangerie-beige: #f5f0e8;
+  --boulangerie-brown-light: #8b5a3c;
+  --boulangerie-brown-dark: #654321;
+  
+  /* Gradients */
+  --gradient-bordeaux-or: linear-gradient(135deg, var(--boulangerie-bordeaux) 0%, var(--boulangerie-or) 100%);
+  --gradient-or-cream: linear-gradient(135deg, var(--boulangerie-or) 0%, var(--boulangerie-cream) 100%);
+  
+  /* Shadows */
+  --shadow-bordeaux: 0 4px 12px rgba(114, 47, 55, 0.15);
+  --shadow-or: 0 4px 12px rgba(212, 175, 55, 0.15);
+  --shadow-elevation: 0 8px 32px rgba(114, 47, 55, 0.12);
+}
+
+/* Classes utilitaires pour la boulangerie */
+.bg-boulangerie-bordeaux { background-color: var(--boulangerie-bordeaux); }
+.bg-boulangerie-bordeaux-light { background-color: var(--boulangerie-bordeaux-light); }
+.bg-boulangerie-bordeaux-dark { background-color: var(--boulangerie-bordeaux-dark); }
+.bg-boulangerie-or { background-color: var(--boulangerie-or); }
+.bg-boulangerie-or-light { background-color: var(--boulangerie-or-light); }
+.bg-boulangerie-or-dark { background-color: var(--boulangerie-or-dark); }
+.bg-boulangerie-cream { background-color: var(--boulangerie-cream); }
+.bg-boulangerie-beige { background-color: var(--boulangerie-beige); }
+
+.text-boulangerie-bordeaux { color: var(--boulangerie-bordeaux); }
+.text-boulangerie-bordeaux-light { color: var(--boulangerie-bordeaux-light); }
+.text-boulangerie-bordeaux-dark { color: var(--boulangerie-bordeaux-dark); }
+.text-boulangerie-or { color: var(--boulangerie-or); }
+.text-boulangerie-or-light { color: var(--boulangerie-or-light); }
+.text-boulangerie-or-dark { color: var(--boulangerie-or-dark); }
+
+.border-boulangerie-bordeaux { border-color: var(--boulangerie-bordeaux); }
+.border-boulangerie-or { border-color: var(--boulangerie-or); }
+
+/* Gradients */
+.bg-gradient-bordeaux-or { background: var(--gradient-bordeaux-or); }
+.bg-gradient-or-cream { background: var(--gradient-or-cream); }
+
+/* Shadows personnalisées */
+.shadow-bordeaux { box-shadow: var(--shadow-bordeaux); }
+.shadow-or { box-shadow: var(--shadow-or); }
+.shadow-elevation { box-shadow: var(--shadow-elevation); }
+
+/* Styles spéciaux pour les boutons */
+.btn-boulangerie-primary {
+  background: var(--boulangerie-or);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-boulangerie-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevation);
+}
+
+.btn-boulangerie-secondary {
+  background: var(--boulangerie-bordeaux-light);
+  color: var(--boulangerie-bordeaux-dark);
+  transition: all 0.3s ease;
+}
+
+.btn-boulangerie-secondary:hover {
+  background: var(--boulangerie-or-light);
+  transform: translateY(-1px);
+}
+
+/* Styles pour les cartes */
+.card-boulangerie {
+  background: var(--boulangerie-cream);
+  border: 1px solid var(--boulangerie-or-light);
+  box-shadow: var(--shadow-or);
+  transition: all 0.3s ease;
+}
+
+.card-boulangerie:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevation);
+  border-color: var(--boulangerie-or);
+}
+
+/* Typography française */
+.font-alsacien {
+  font-family: var(--font-alsacien), 'Crimson Text', 'Georgia', serif;
+}
+
+.font-artisan {
+  font-family: var(--font-artisan), 'Playfair Display', 'Times New Roman', serif;
+}
+
+/* Animations spéciales */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.shimmer-or {
+  background: linear-gradient(90deg, var(--boulangerie-or) 0px, var(--boulangerie-or-light) 40px, var(--boulangerie-or) 80px);
+  background-size: 200px;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Pattern alsacien subtil */
+.bg-pattern-alsacien {
+  background-image: 
+    radial-gradient(circle at 2px 2px, var(--boulangerie-or) 1px, transparent 0);
+  background-size: 20px 20px;
+  opacity: 0.05;
+}
+
+/* Effet de texture pain */
+.texture-pain {
+  background-image: 
+    radial-gradient(circle at 3px 3px, rgba(212, 175, 55, 0.1) 1px, transparent 0),
+    radial-gradient(circle at 8px 8px, rgba(114, 47, 55, 0.05) 1px, transparent 0);
+  background-size: 15px 15px, 25px 25px;
+}
+
+/* Animation pour le drawer */
+.drawer-slide-in {
+  animation: slideInFromRight 0.3s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

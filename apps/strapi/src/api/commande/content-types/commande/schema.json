@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "commandes",
+  "info": {
+    "singularName": "commande",
+    "pluralName": "commandes",
+    "displayName": "Commande",
+    "description": "Gestion des commandes de la boulangerie"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "numero": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "statut": {
+      "type": "enumeration",
+      "enum": ["EN_ATTENTE", "CONFIRMEE", "EN_PREPARATION", "PRETE", "RETIREE", "ANNULEE"],
+      "default": "EN_ATTENTE",
+      "required": true
+    },
+    "modeRetrait": {
+      "type": "enumeration",
+      "enum": ["RETRAIT"],
+      "default": "RETRAIT",
+      "required": true
+    },
+    "produits": {
+      "type": "json",
+      "required": true
+    },
+    "prixTotal": {
+      "type": "decimal",
+      "required": true
+    },
+    "informationsClient": {
+      "type": "json",
+      "required": true
+    },
+    "creneauRetrait": {
+      "type": "json",
+      "required": true
+    },
+    "commentaires": {
+      "type": "text"
+    },
+    "dateCreation": {
+      "type": "datetime",
+      "default": "now()"
+    },
+    "dateMiseAJour": {
+      "type": "datetime"
+    },
+    "dateRetiree": {
+      "type": "datetime"
+    },
+    "utilisateur": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::utilisateur.utilisateur",
+      "inversedBy": "commandes"
+    },
+    "paiementStatut": {
+      "type": "enumeration",
+      "enum": ["EN_ATTENTE", "PAYE", "REMBOURSE", "ECHOUE"],
+      "default": "EN_ATTENTE"
+    },
+    "paiementMethode": {
+      "type": "enumeration",
+      "enum": ["CARTE", "ESPECES", "CHEQUE", "VIREMENT"]
+    },
+    "paiementReference": {
+      "type": "string"
+    }
+  }
+}
