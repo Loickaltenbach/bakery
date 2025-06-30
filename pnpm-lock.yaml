@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      framer-motion:
+        specifier: ^12.19.2
+        version: 12.19.2(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
     devDependencies:
       '@workspace/eslint-config':
         specifier: workspace:*
@@ -3964,6 +3968,20 @@ packages:
     resolution: {integrity: sha512-PcOxmqwYCW7O2ovKRU8OoQQj2yqTfEB/yeTYk4gPid6dN5ODRfU1hXd9tTVZzax/0NkO7AxpHykvZnT1aYp/BQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
 
+  framer-motion@12.19.2:
+    resolution: {integrity: sha512-0cWMLkYr+i0emeXC4hkLF+5aYpzo32nRdQ0D/5DI460B3O7biQ3l2BpDzIGsAHYuZ0fpBP0DC8XBkVf6RPAlZw==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -5285,6 +5303,12 @@ packages:
     resolution: {integrity: sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==}
     engines: {node: '>=10'}
     hasBin: true
+
+  motion-dom@12.19.0:
+    resolution: {integrity: sha512-m96uqq8VbwxFLU0mtmlsIVe8NGGSdpBvBSHbnnOJQxniPaabvVdGgxSamhuDwBsRhwX7xPxdICgVJlOpzn/5bw==}
+
+  motion-utils@12.19.0:
+    resolution: {integrity: sha512-BuFTHINYmV07pdWs6lj6aI63vr2N4dg0vR+td0rtrdpWOhBzIkEklZyLcvKBoEtwSqx8Jg06vUB5RS0xDiUybw==}
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -9004,7 +9028,7 @@ snapshots:
       '@strapi/design-system': 2.0.0-rc.26(@babel/runtime@7.27.6)(@codemirror/autocomplete@6.18.6)(@codemirror/language@6.11.1)(@codemirror/lint@6.8.5)(@codemirror/search@6.5.11)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.37.2)(@strapi/icons@2.0.0-rc.26(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.7(@types/react@18.3.23))(@types/react@18.3.23)(codemirror@5.65.19)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.0.0-rc.26(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/permissions': 5.16.0
-      '@strapi/types': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.7.3)
+      '@strapi/types': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.4.4)
       '@strapi/typescript-utils': 5.16.0
       '@strapi/utils': 5.16.0
       '@testing-library/dom': 10.1.0
@@ -9200,7 +9224,7 @@ snapshots:
       '@strapi/database': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)
       '@strapi/design-system': 2.0.0-rc.26(@babel/runtime@7.27.6)(@codemirror/autocomplete@6.18.6)(@codemirror/language@6.11.1)(@codemirror/lint@6.8.5)(@codemirror/search@6.5.11)(@codemirror/state@6.5.2)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.37.2)(@strapi/icons@2.0.0-rc.26(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(@types/react-dom@18.3.7(@types/react@18.3.23))(@types/react@18.3.23)(codemirror@5.65.19)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@strapi/icons': 2.0.0-rc.26(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@strapi/types': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.7.3)
+      '@strapi/types': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.4.4)
       '@strapi/utils': 5.16.0
       date-fns: 2.30.0
       date-fns-tz: 2.0.1(date-fns@2.30.0)
@@ -9293,7 +9317,7 @@ snapshots:
       '@strapi/generators': 5.16.0
       '@strapi/logger': 5.16.0
       '@strapi/permissions': 5.16.0
-      '@strapi/types': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.7.3)
+      '@strapi/types': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.4.4)
       '@strapi/typescript-utils': 5.16.0
       '@strapi/utils': 5.16.0
       bcryptjs: 2.4.3
@@ -9703,7 +9727,7 @@ snapshots:
       '@strapi/logger': 5.16.0
       '@strapi/permissions': 5.16.0
       '@strapi/review-workflows': 5.16.0(d17862238990da7c4182a709067c7e1d)
-      '@strapi/types': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.7.3)
+      '@strapi/types': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.4.4)
       '@strapi/typescript-utils': 5.16.0
       '@strapi/upload': 5.16.0(e2ca3d8a22f559ed9282da00ea92dd8e)
       '@strapi/utils': 5.16.0
@@ -9804,6 +9828,34 @@ snapshots:
       - webpack-cli
       - webpack-dev-server
       - webpack-plugin-serve
+
+  '@strapi/types@5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.4.4)':
+    dependencies:
+      '@casl/ability': 6.5.0
+      '@koa/cors': 5.0.0
+      '@koa/router': 12.0.2
+      '@strapi/database': 5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)
+      '@strapi/logger': 5.16.0
+      '@strapi/permissions': 5.16.0
+      '@strapi/utils': 5.16.0
+      commander: 8.3.0
+      koa: 2.16.1
+      koa-body: 6.0.1
+      node-schedule: 2.1.1
+      typedoc: 0.25.10(typescript@5.4.4)
+      typedoc-github-wiki-theme: 1.1.0(typedoc-plugin-markdown@3.17.1(typedoc@0.25.10(typescript@5.7.3)))(typedoc@0.25.10(typescript@5.7.3))
+      typedoc-plugin-markdown: 3.17.1(typedoc@0.25.10(typescript@5.7.3))
+    transitivePeerDependencies:
+      - '@types/node'
+      - better-sqlite3
+      - mysql
+      - mysql2
+      - pg
+      - pg-native
+      - sqlite3
+      - supports-color
+      - tedious
+      - typescript
 
   '@strapi/types@5.16.0(@types/node@20.19.1)(better-sqlite3@11.3.0)(pg@8.16.2)(typescript@5.7.3)':
     dependencies:
@@ -12155,6 +12207,16 @@ snapshots:
 
   fractional-indexing@3.2.0: {}
 
+  framer-motion@12.19.2(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      motion-dom: 12.19.0
+      motion-utils: 12.19.0
+      tslib: 2.8.1
+    optionalDependencies:
+      '@emotion/is-prop-valid': 1.2.2
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
   fresh@0.5.2: {}
 
   fs-constants@1.0.0: {}
@@ -13557,6 +13619,12 @@ snapshots:
   mkdirp@1.0.4: {}
 
   mkdirp@3.0.1: {}
+
+  motion-dom@12.19.0:
+    dependencies:
+      motion-utils: 12.19.0
+
+  motion-utils@12.19.0: {}
 
   mrmime@2.0.1: {}
 
@@ -15496,6 +15564,14 @@ snapshots:
     dependencies:
       handlebars: 4.7.8
       typedoc: 0.25.10(typescript@5.7.3)
+
+  typedoc@0.25.10(typescript@5.4.4):
+    dependencies:
+      lunr: 2.3.9
+      marked: 4.3.0
+      minimatch: 9.0.5
+      shiki: 0.14.7
+      typescript: 5.4.4
 
   typedoc@0.25.10(typescript@5.7.3):
     dependencies:

@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "evaluations",
+  "info": {
+    "singularName": "evaluation",
+    "pluralName": "evaluations",
+    "displayName": "Evaluation",
+    "description": "Évaluations clients des commandes"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "commande": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::commande.commande",
+      "inversedBy": "evaluation"
+    },
+    "note": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 5
+    },
+    "commentaire": {
+      "type": "text"
+    },
+    "criteres": {
+      "type": "json",
+      "description": "Détail des notes par critère (qualité, service, délai, etc.)"
+    },
+    "recommandation": {
+      "type": "boolean",
+      "default": false
+    },
+    "dateEvaluation": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}

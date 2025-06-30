@@ -1,10 +1,18 @@
-export { Button } from './components/button.js';
-export { Badge } from './components/badge.js';
+export { Badge } from "./components/badge.js";
+export { Button } from "./components/button.js";
 export { 
   Card, 
-  CardHeader, 
-  CardFooter, 
-  CardTitle, 
+  CardContent, 
   CardDescription, 
-  CardContent 
-} from './components/card.js';
+  CardFooter, 
+  CardHeader, 
+  CardTitle 
+} from "./components/card.js";
+export { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "./components/select.js";
+export { Switch } from "./components/switch.js";

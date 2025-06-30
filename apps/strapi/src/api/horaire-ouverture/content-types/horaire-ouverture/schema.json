@@ -1,0 +1,94 @@
+{
+  "kind": "singleType",
+  "collectionName": "configuration_horaires",
+  "info": {
+    "singularName": "horaire-ouverture",
+    "pluralName": "horaires-ouvertures",
+    "displayName": "Configuration Horaires",
+    "description": "Configuration globale des horaires et créneaux de retrait"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "horairesNormaux": {
+      "type": "json",
+      "required": true,
+      "default": {
+        "lundi": {
+          "ouvert": true,
+          "matin": { "debut": "07:00", "fin": "12:30" },
+          "apresmidi": { "debut": "14:00", "fin": "19:00" }
+        },
+        "mardi": {
+          "ouvert": true,
+          "matin": { "debut": "07:00", "fin": "12:30" },
+          "apresmidi": { "debut": "14:00", "fin": "19:00" }
+        },
+        "mercredi": {
+          "ouvert": true,
+          "matin": { "debut": "07:00", "fin": "12:30" },
+          "apresmidi": { "debut": "14:00", "fin": "19:00" }
+        },
+        "jeudi": {
+          "ouvert": true,
+          "matin": { "debut": "07:00", "fin": "12:30" },
+          "apresmidi": { "debut": "14:00", "fin": "19:00" }
+        },
+        "vendredi": {
+          "ouvert": true,
+          "matin": { "debut": "07:00", "fin": "12:30" },
+          "apresmidi": { "debut": "14:00", "fin": "19:00" }
+        },
+        "samedi": {
+          "ouvert": true,
+          "matin": { "debut": "08:00", "fin": "13:00" },
+          "apresmidi": { "debut": null, "fin": null }
+        },
+        "dimanche": {
+          "ouvert": false,
+          "matin": { "debut": null, "fin": null },
+          "apresmidi": { "debut": null, "fin": null }
+        }
+      }
+    },
+    "configurationCreneaux": {
+      "type": "json",
+      "required": true,
+      "default": {
+        "intervalleMinutes": 30,
+        "delaiMinimumMinutes": 60,
+        "delaiMaximumJours": 7,
+        "creneauxSimultanes": 5
+      }
+    },
+    "delaisPreparation": {
+      "type": "json",
+      "required": true,
+      "default": {
+        "pains": 15,
+        "viennoiseries": 30,
+        "patisseries": 60,
+        "sandwichs": 10,
+        "boissons": 5,
+        "autres": 30
+      }
+    },
+    "messagesFermeture": {
+      "type": "json",
+      "default": {
+        "fermetureTemporaire": "Boulangerie temporairement fermée",
+        "horsHoraires": "Commandes possibles uniquement pendant nos heures d'ouverture",
+        "conges": "Nous sommes en congés, réouverture le"
+      }
+    }
+  }
+}

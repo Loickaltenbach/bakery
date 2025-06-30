@@ -2,7 +2,10 @@ import { Geist, Geist_Mono, Crimson_Text, Playfair_Display } from "next/font/goo
 
 import "@workspace/ui/globals.css"
 import "../styles/boulangerie-theme.css"
+import "../styles/accessibility.css"
 import { Providers } from "@/components/providers"
+import { SkipLinks } from "@/components/ui/accessibility"
+import { AccessibilityButton } from "@/components/ui/accessibility-button"
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -36,11 +39,22 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#eeb135" />
+        <meta name="description" content="Boulangerie artisanale alsacienne - Pain traditionnel, viennoiseries et pâtisseries fraîches" />
       </head>
       <body
         className={`${fontSans.variable} ${fontMono.variable} ${fontAlsacien.variable} ${fontArtisan.variable} font-sans antialiased bg-boulangerie-cream`}
       >
-        <Providers>{children}</Providers>
+        <SkipLinks />
+        <Providers>
+          <div className="min-h-screen flex flex-col">
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <AccessibilityButton />
+          </div>
+        </Providers>
       </body>
     </html>
   )

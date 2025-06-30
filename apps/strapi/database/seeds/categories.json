@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "nom": "Pains",
+    "slug": "pains",
+    "description": "Pains traditionnels et spéciaux, cuits au feu de bois",
+    "couleur": "#8B4513",
+    "icone": "🍞",
+    "ordre": 1,
+    "disponible": true,
+    "delaiPreparationDefaut": 30,
+    "disponibiliteJours": {
+      "lundi": true,
+      "mardi": true,
+      "mercredi": true,
+      "jeudi": true,
+      "vendredi": true,
+      "samedi": true,
+      "dimanche": true
+    }
+  },
+  {
+    "id": 2,
+    "nom": "Viennoiseries",
+    "slug": "viennoiseries",
+    "description": "Croissants, pains au chocolat et autres délices du matin",
+    "couleur": "#DAA520",
+    "icone": "🥐",
+    "ordre": 2,
+    "disponible": true,
+    "delaiPreparationDefaut": 45,
+    "disponibiliteJours": {
+      "lundi": true,
+      "mardi": true,
+      "mercredi": true,
+      "jeudi": true,
+      "vendredi": true,
+      "samedi": true,
+      "dimanche": true
+    }
+  },
+  {
+    "id": 3,
+    "nom": "Pâtisseries",
+    "slug": "patisseries",
+    "description": "Gâteaux, tartes et desserts préparés avec soin",
+    "couleur": "#FF69B4",
+    "icone": "🍰",
+    "ordre": 3,
+    "disponible": true,
+    "delaiPreparationDefaut": 60,
+    "disponibiliteJours": {
+      "lundi": true,
+      "mardi": true,
+      "mercredi": true,
+      "jeudi": true,
+      "vendredi": true,
+      "samedi": true,
+      "dimanche": true
+    }
+  },
+  {
+    "id": 4,
+    "nom": "Sandwichs",
+    "slug": "sandwichs",
+    "description": "Sandwichs frais préparés avec nos pains maison",
+    "couleur": "#32CD32",
+    "icone": "🥪",
+    "ordre": 4,
+    "disponible": true,
+    "delaiPreparationDefaut": 15,
+    "disponibiliteJours": {
+      "lundi": true,
+      "mardi": true,
+      "mercredi": true,
+      "jeudi": true,
+      "vendredi": true,
+      "samedi": false,
+      "dimanche": false
+    }
+  },
+  {
+    "id": 5,
+    "nom": "Boissons",
+    "slug": "boissons",
+    "description": "Café, thé, jus de fruits et boissons fraîches",
+    "couleur": "#4169E1",
+    "icone": "☕",
+    "ordre": 5,
+    "disponible": true,
+    "delaiPreparationDefaut": 5,
+    "disponibiliteJours": {
+      "lundi": true,
+      "mardi": true,
+      "mercredi": true,
+      "jeudi": true,
+      "vendredi": true,
+      "samedi": true,
+      "dimanche": true
+    }
+  }
+]

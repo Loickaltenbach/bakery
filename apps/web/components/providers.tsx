@@ -5,6 +5,11 @@ import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { PanierProvider } from "@/contexts/PanierContext"
 import { CommandeProvider } from "@/contexts/CommandeContext"
 import { AuthProvider } from "@/contexts/AuthContext"
+import { ThemeProvider } from "@/contexts/ThemeContext"
+import { FavorisProvider } from "@/contexts/FavorisContext"
+import { CommandesRapidesProvider } from "@/contexts/CommandesRapidesContext"
+import { OfflineProvider } from "@/contexts/OfflineContext"
+import { AccessibilityProvider } from "@/components/ui/accessibility"
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -15,13 +20,23 @@ export function Providers({ children }: { children: React.ReactNode }) {
       disableTransitionOnChange
       enableColorScheme
     >
-      <AuthProvider>
-        <PanierProvider>
-          <CommandeProvider>
-            {children}
-          </CommandeProvider>
-        </PanierProvider>
-      </AuthProvider>
+      <AccessibilityProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <OfflineProvider>
+              <FavorisProvider>
+                <CommandesRapidesProvider>
+                  <PanierProvider>
+                    <CommandeProvider>
+                      {children}
+                    </CommandeProvider>
+                  </PanierProvider>
+                </CommandesRapidesProvider>
+              </FavorisProvider>
+            </OfflineProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </AccessibilityProvider>
     </NextThemesProvider>
   )
 }

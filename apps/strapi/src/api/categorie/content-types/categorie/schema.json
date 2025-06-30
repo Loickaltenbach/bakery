@@ -10,7 +10,14 @@
   "options": {
     "draftAndPublish": false
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
   "attributes": {
     "nom": {
       "type": "string",
@@ -36,7 +43,8 @@
     "icone": {
       "type": "string",
       "maxLength": 50,
-      "default": "package"
+      "default": "package",
+      "description": "Nom de l'icône pour l'affichage"
     },
     "ordre": {
       "type": "integer",
@@ -48,6 +56,33 @@
       "multiple": false,
       "required": false,
       "allowedTypes": ["images"]
+    },
+    "tempsPreparationDefaut": {
+      "type": "integer",
+      "default": 30,
+      "description": "Temps de préparation par défaut pour cette catégorie (minutes)"
+    },
+    "delaiPreparationDefaut": {
+      "type": "integer",
+      "default": 30,
+      "description": "Délai de préparation par défaut pour cette catégorie (minutes)"
+    },
+    "disponible": {
+      "type": "boolean",
+      "default": true
+    },
+    "disponibiliteJours": {
+      "type": "json",
+      "default": {
+        "lundi": true,
+        "mardi": true,
+        "mercredi": true,
+        "jeudi": true,
+        "vendredi": true,
+        "samedi": true,
+        "dimanche": false
+      },
+      "description": "Disponibilité par défaut pour les produits de cette catégorie"
     },
     "produits": {
       "type": "relation",

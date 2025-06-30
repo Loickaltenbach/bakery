@@ -1,53 +1,14 @@
-'use client';
-
-import React, { useState } from 'react';
-import { PanierDrawer } from "../components/panier-drawer";
-import { ProcessusCommande } from "../components/ProcessusCommande";
-import { CategorieFilter } from "../components/categorie-filter";
-import { usePanier } from "../contexts/PanierContext";
-import { useProduitsPage } from "../hooks";
-import {
-  LoadingSpinner,
-  ErrorDisplay,
-  PanierButton,
-  TestDataBanner,
-  ProduitsGrid,
-  EmptyState,
-  CategorieHeader,
-  ProduitsCounter
-} from "../components/ui";
+import { HomePage } from "@/components/home/home-page"
+import { NavbarAvancee } from "@/components/navigation/navbar-avancee"
 
 export default function Page() {
-  const { fermerPanier } = usePanier();
-  const [isCommandeOpen, setIsCommandeOpen] = useState(false);
-  
-  const {
-    categories,
-    produitsFiltres,
-    categorieSelectionnee,
-    produitsCountByCategory,
-    loading,
-    error,
-    useTestData,
-    selectedCategoryId,
-    selectCategorie,
-    clearSelection,
-  } = useProduitsPage();
-
-  const handleStartCommande = () => {
-    setIsCommandeOpen(true);
-  };
-
-  const handleCloseCommande = () => {
-    setIsCommandeOpen(false);
-  };
-
-  // Gestion des états
-  if (loading) {
-    return <LoadingSpinner message="Chargement des produits..." />;
-  }
-
-  if (error) {
+  return (
+    <>
+      <NavbarAvancee />
+      <HomePage />
+    </>
+  )
+}
     return <ErrorDisplay error={error} onRetry={() => window.location.reload()} />;
   }
 

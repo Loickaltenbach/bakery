@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fermetures_exceptionnelles",
+  "info": {
+    "singularName": "fermeture-exceptionnelle",
+    "pluralName": "fermetures-exceptionnelles",
+    "displayName": "Fermeture exceptionnelle",
+    "description": "Gestion des congés et fermetures exceptionnelles"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true,
+      "description": "Nom de la fermeture (ex: Vacances d'été, Jour férié)"
+    },
+    "description": {
+      "type": "text"
+    },
+    "dateDebut": {
+      "type": "datetime",
+      "required": true
+    },
+    "dateFin": {
+      "type": "datetime",
+      "required": true
+    },
+    "typeFermeture": {
+      "type": "enumeration",
+      "enum": ["conges", "jour_ferie", "evenement_prive", "maintenance", "autre"],
+      "required": true,
+      "default": "autre"
+    },
+    "fermetureComplete": {
+      "type": "boolean",
+      "default": true,
+      "description": "Fermeture complète ou partielle"
+    },
+    "horairesModifies": {
+      "type": "json",
+      "description": "Horaires modifiés si fermeture partielle",
+      "default": null
+    },
+    "messageClient": {
+      "type": "text",
+      "description": "Message à afficher aux clients"
+    },
+    "reporterCommandes": {
+      "type": "boolean",
+      "default": true,
+      "description": "Reporter automatiquement les commandes existantes"
+    },
+    "nouveauDateReport": {
+      "type": "date",
+      "description": "Date de report suggérée pour les commandes"
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "description": "Afficher cette fermeture sur le site"
+    },
+    "recurrent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Se répète chaque année"
+    },
+    "actif": {
+      "type": "boolean",
+      "default": true
+    },
+    "couleur": {
+      "type": "string",
+      "default": "#ff4444",
+      "description": "Couleur d'affichage dans le calendrier"
+    }
+  }
+}

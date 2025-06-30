@@ -31,9 +31,9 @@
       "type": "decimal",
       "required": true
     },
-    "image": {
+    "images": {
       "type": "media",
-      "multiple": false,
+      "multiple": true,
       "allowedTypes": [
         "images"
       ]
@@ -46,9 +46,28 @@
       "type": "integer",
       "default": 0
     },
+    "stockMinimum": {
+      "type": "integer",
+      "default": 5
+    },
+    "enRupture": {
+      "type": "boolean",
+      "default": false
+    },
     "allergenes": {
       "type": "json",
       "default": []
+    },
+    "informationsNutritionnelles": {
+      "type": "json",
+      "default": {
+        "calories": null,
+        "proteines": null,
+        "glucides": null,
+        "lipides": null,
+        "fibres": null,
+        "sel": null
+      }
     },
     "regimesCompatibles": {
       "type": "json",
@@ -56,7 +75,8 @@
     },
     "tempsPreparation": {
       "type": "integer",
-      "default": 30
+      "default": 30,
+      "description": "Temps de préparation en minutes"
     },
     "poids": {
       "type": "decimal"
@@ -65,6 +85,45 @@
       "type": "enumeration",
       "enum": ["piece", "gramme", "kilogramme", "litre"],
       "default": "piece"
+    },
+    "disponibiliteJours": {
+      "type": "json",
+      "default": {
+        "lundi": true,
+        "mardi": true,
+        "mercredi": true,
+        "jeudi": true,
+        "vendredi": true,
+        "samedi": true,
+        "dimanche": false
+      }
+    },
+    "produitSaisonnier": {
+      "type": "boolean",
+      "default": false
+    },
+    "dateDebutSaison": {
+      "type": "date"
+    },
+    "dateFinSaison": {
+      "type": "date"
+    },
+    "ordre": {
+      "type": "integer",
+      "default": 0
+    },
+    "nouveaute": {
+      "type": "boolean",
+      "default": false
+    },
+    "promotion": {
+      "type": "json",
+      "default": {
+        "active": false,
+        "pourcentage": 0,
+        "dateDebut": null,
+        "dateFin": null
+      }
     },
     "categorie": {
       "type": "relation",

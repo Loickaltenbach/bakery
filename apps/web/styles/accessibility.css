@@ -1,0 +1,469 @@
+/* Styles d'accessibilité et responsive design avancé */
+
+/* Classes utilitaires pour l'accessibilité */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.focus:not-sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Focus visible amélioré */
+.focus-visible\:ring-boulangerie-gold:focus-visible {
+  box-shadow: 0 0 0 3px rgba(239, 181, 53, 0.5);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* Mode contraste élevé */
+.high-contrast {
+  --boulangerie-gold: #FFD700;
+  --boulangerie-marron: #000000;
+  --boulangerie-cream: #FFFFFF;
+}
+
+.high-contrast * {
+  border-color: #000000 !important;
+}
+
+.high-contrast .text-gray-500 {
+  color: #000000 !important;
+}
+
+.high-contrast .text-gray-600 {
+  color: #000000 !important;
+}
+
+.high-contrast .bg-gray-100 {
+  background-color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+}
+
+.high-contrast .bg-gray-200 {
+  background-color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+}
+
+.high-contrast .shadow-sm,
+.high-contrast .shadow,
+.high-contrast .shadow-md,
+.high-contrast .shadow-lg,
+.high-contrast .shadow-xl {
+  box-shadow: 0 0 0 2px #000000 !important;
+}
+
+/* Animations réduites */
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Tailles de police */
+.font-large {
+  font-size: 1.125rem;
+}
+
+.font-large h1 {
+  font-size: 3rem;
+}
+
+.font-large h2 {
+  font-size: 2.25rem;
+}
+
+.font-large h3 {
+  font-size: 1.875rem;
+}
+
+.font-large .text-sm {
+  font-size: 1rem;
+}
+
+.font-large .text-xs {
+  font-size: 0.875rem;
+}
+
+.font-xl {
+  font-size: 1.25rem;
+}
+
+.font-xl h1 {
+  font-size: 3.5rem;
+}
+
+.font-xl h2 {
+  font-size: 2.5rem;
+}
+
+.font-xl h3 {
+  font-size: 2rem;
+}
+
+.font-xl .text-sm {
+  font-size: 1.125rem;
+}
+
+.font-xl .text-xs {
+  font-size: 1rem;
+}
+
+/* Responsive design amélioré */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Réduire les espacements sur mobile */
+  .py-16 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .py-24 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  /* Textes plus petits sur mobile */
+  .text-4xl {
+    font-size: 2rem;
+  }
+
+  .text-3xl {
+    font-size: 1.75rem;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+
+  /* Navigation mobile optimisée */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    z-index: 50;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-decoration: none;
+  }
+
+  .mobile-nav-item.active {
+    color: #eeb135;
+  }
+
+  .mobile-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Cartes empilées sur très petit écran */
+  .grid-responsive {
+    grid-template-columns: 1fr;
+  }
+
+  /* Boutons pleine largeur sur mobile */
+  .btn-mobile-full {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Espacement réduit */
+  .gap-8 {
+    gap: 1rem;
+  }
+
+  .gap-6 {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Grilles adaptatives */
+  .md\:grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Navigation hamburger */
+  .nav-desktop {
+    display: none;
+  }
+
+  .nav-mobile {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-desktop {
+    display: flex;
+  }
+
+  .nav-mobile {
+    display: none;
+  }
+}
+
+/* Améliorations pour tablettes */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* Grilles optimisées pour tablette */
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mode sombre amélioré */
+@media (prefers-color-scheme: dark) {
+  .dark\:mobile-nav {
+    background: #1f2937;
+    border-top-color: #374151;
+  }
+}
+
+/* Accessibilité - Focus amélioré */
+*:focus-visible {
+  outline: 2px solid #eeb135;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  box-shadow: 0 0 0 3px rgba(238, 177, 53, 0.3);
+}
+
+/* Indicateurs de focus pour navigation clavier */
+.keyboard-navigation button:focus,
+.keyboard-navigation a:focus,
+.keyboard-navigation input:focus,
+.keyboard-navigation select:focus,
+.keyboard-navigation textarea:focus {
+  outline: 2px solid #eeb135;
+  outline-offset: 2px;
+}
+
+/* Animation de loading accessible */
+@keyframes spin-accessible {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-accessible {
+  animation: spin-accessible 1s linear infinite;
+}
+
+/* Respect des préférences utilisateur pour les animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Amélioration des contrastes */
+@media (prefers-contrast: high) {
+  .text-gray-500 {
+    color: #000000;
+  }
+
+  .text-gray-600 {
+    color: #000000;
+  }
+
+  .border-gray-200 {
+    border-color: #000000;
+  }
+
+  .bg-gray-100 {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+  }
+}
+
+/* Utilitaires pour le responsive design */
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-photo {
+  aspect-ratio: 4 / 3;
+}
+
+/* Grilles responsive avancées */
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+/* Container queries pour les composants */
+@container (max-width: 320px) {
+  .card-small {
+    padding: 0.75rem;
+  }
+
+  .card-small h3 {
+    font-size: 1rem;
+  }
+
+  .card-small p {
+    font-size: 0.875rem;
+  }
+}
+
+@container (min-width: 500px) {
+  .card-large {
+    padding: 2rem;
+  }
+
+  .card-large h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Amélioration des formulaires */
+.form-field {
+  position: relative;
+}
+
+.form-field input:focus + label,
+.form-field input:not(:placeholder-shown) + label {
+  transform: translateY(-1.5rem) scale(0.875);
+  color: #eeb135;
+}
+
+.form-field label {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+  color: #6b7280;
+}
+
+/* Styles pour les notifications toast */
+.toast {
+  animation: toast-in 0.3s ease-out;
+}
+
+.toast.toast-out {
+  animation: toast-out 0.3s ease-in;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-1rem) scale(0.9);
+  }
+}
+
+/* Amélioration de la lisibilité */
+.text-readable {
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 640px) {
+  .text-readable {
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+}
+
+/* Classes utilitaires pour l'état de chargement */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+}

@@ -28,7 +28,12 @@ export function useCategories() {
   return { categories, loading, error, refetch: fetchCategories };
 }
 
-export function useProduits(categorieSlug?: string) {
+export function useProduits(categorieSlug?: string, filtres?: {
+  jour?: string;
+  saisonniers?: boolean;
+  disponibles?: boolean;
+  nouveautes?: boolean;
+}) {
   const [produits, setProduits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,6 +45,23 @@ export function useProduits(categorieSlug?: string) {
       
       if (categorieSlug) {
         url += `&filters[categorie][slug][$eq]=${categorieSlug}`;
+      }
+
+      // Filtres additionnels
+      if (filtres?.disponibles) {
+        url += '&filters[disponible][$eq]=true&filters[enRupture][$eq]=false';
+      }
+
+      if (filtres?.nouveautes) {
+        url += '&filters[nouveaute][$eq]=true';
+      }
+
+      if (filtres?.jour) {
+        url += `&filters[disponibiliteJours][${filtres.jour}][$eq]=true`;
+      }
+
+      if (filtres?.saisonniers !== undefined) {
+        url += `&filters[produitSaisonnier][$eq]=${filtres.saisonniers}`;
       }
       
       const data = await strapiApi.get(url);
@@ -53,9 +75,84 @@ export function useProduits(categorieSlug?: string) {
 
   useEffect(() => {
     fetchProduits();
-  }, [categorieSlug]);
+  }, [categorieSlug, JSON.stringify(filtres)]);
 
   return { produits, loading, error, refetch: fetchProduits };
+}
+
+// Hook pour les horaires et créneaux
+export function useHoraires() {
+  const [horaires, setHoraires] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchHoraires = async () => {
+    try {
+      setLoading(true);
+      const data = await strapiApi.get('/horaires-ouverture/aujourd-hui');
+      setHoraires(data);
+    } catch (err: any) {
+      setError(err.message || 'Erreur lors du chargement des horaires');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getCreneauxDisponibles = async (date: string, categorie?: string) => {
+    try {
+      let url = `/horaires-ouverture/creneaux-disponibles?date=${date}`;
+      if (categorie) {
+        url += `&categorie=${categorie}`;
+      }
+      const data = await strapiApi.get(url);
+      return data;
+    } catch (err: any) {
+      throw new Error(err.message || 'Erreur lors du chargement des créneaux');
+    }
+  };
+
+  useEffect(() => {
+    fetchHoraires();
+  }, []);
+
+  return { 
+    horaires, 
+    loading, 
+    error, 
+    refetch: fetchHoraires,
+    getCreneauxDisponibles 
+  };
+}
+
+// Hook pour la gestion du stock
+export function useStockManagement() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const updateStock = async (produitId: string, nouvelleQuantite: number) => {
+    try {
+      setLoading(true);
+      setError(null);
+      await strapiApi.put(`/produits/${produitId}/stock`, { stock: nouvelleQuantite });
+      return true;
+    } catch (err: any) {
+      setError(err.message || 'Erreur lors de la mise à jour du stock');
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getAlertes = async () => {
+    try {
+      const data = await strapiApi.get('/produits/alertes-stock');
+      return data.data || [];
+    } catch (err: any) {
+      throw new Error(err.message || 'Erreur lors du chargement des alertes');
+    }
+  };
+
+  return { updateStock, getAlertes, loading, error };
 }
 
 export function useCommandes(filters?: any) {
@@ -111,62 +208,4 @@ export function useCommandes(filters?: any) {
     updateStatut: updateCommandeStatut,
     refetch: fetchCommandes 
   };
-}
-
-export function useStats(dateDebut?: string, dateFin?: string) {
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchStats = async () => {
-    try {
-      setLoading(true);
-      let url = '/commandes/stats';
-      
-      const params = new URLSearchParams();
-      if (dateDebut) params.append('dateDebut', dateDebut);
-      if (dateFin) params.append('dateFin', dateFin);
-      
-      if (params.toString()) {
-        url += `?${params.toString()}`;
-      }
-      
-      const data = await strapiApi.get(url);
-      setStats(data);
-    } catch (err: any) {
-      setError(err.message || 'Erreur lors du chargement des statistiques');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchStats();
-  }, [dateDebut, dateFin]);
-
-  return { stats, loading, error, refetch: fetchStats };
-}
-
-export function useUtilisateurs() {
-  const [utilisateurs, setUtilisateurs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchUtilisateurs = async () => {
-    try {
-      setLoading(true);
-      const data = await strapiApi.get('/utilisateurs?populate=*');
-      setUtilisateurs(data.data || []);
-    } catch (err: any) {
-      setError(err.message || 'Erreur lors du chargement des utilisateurs');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchUtilisateurs();
-  }, []);
-
-  return { utilisateurs, loading, error, refetch: fetchUtilisateurs };
 }
