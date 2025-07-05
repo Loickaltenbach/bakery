@@ -4,7 +4,7 @@
 
 import { factories } from '@strapi/strapi'
 
-export default factories.createCoreController('api::horaire-ouverture.horaire-ouverture', ({ strapi }) => ({
+export default factories.createCoreController('api::horaire-ouverture.horaire-ouverture' as any, ({ strapi }) => ({
   // GET /api/horaires-ouverture/creneaux-disponibles
   async creneauxDisponibles(ctx: any) {
     try {

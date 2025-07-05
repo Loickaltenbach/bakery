@@ -4,22 +4,22 @@
 
 import { factories } from '@strapi/strapi'
 
-export default factories.createCoreController('api::evaluation.evaluation', ({ strapi }) => ({
+export default factories.createCoreController('api::evaluation.evaluation' as any, ({ strapi }) => ({
   // POST /api/evaluations
   async create(ctx: any) {
     try {
       const data = ctx.request.body.data;
       
       // Vérifier que la commande existe et qu'elle n'a pas déjà d'évaluation
-      const commande = await strapi.entityService.findOne('api::commande.commande', data.commande, {
-        populate: ['evaluation']
+      const commande = await strapi.entityService.findOne('api::commande.commande' as any, data.commande, {
+        populate: ['evaluation'] as any
       });
 
       if (!commande) {
         return ctx.badRequest('Commande introuvable');
       }
 
-      if (commande.evaluation) {
+      if ((commande as any).evaluation) {
         return ctx.badRequest('Cette commande a déjà été évaluée');
       }
 
@@ -31,7 +31,7 @@ export default factories.createCoreController('api::evaluation.evaluation', ({ s
       // Ajouter la date d'évaluation
       data.dateEvaluation = new Date();
 
-      const evaluation = await strapi.entityService.create('api::evaluation.evaluation', {
+      const evaluation = await strapi.entityService.create('api::evaluation.evaluation' as any, {
         data,
         populate: ['commande']
       });
@@ -52,7 +52,7 @@ export default factories.createCoreController('api::evaluation.evaluation', ({ s
       const debut = dateDebut ? new Date(dateDebut) : new Date(maintenant.getFullYear(), maintenant.getMonth(), 1);
       const fin = dateFin ? new Date(dateFin) : maintenant;
 
-      const evaluations = await strapi.entityService.findMany('api::evaluation.evaluation', {
+      const evaluations = await strapi.entityService.findMany('api::evaluation.evaluation' as any, {
         filters: {
           dateEvaluation: { $gte: debut, $lte: fin }
         },

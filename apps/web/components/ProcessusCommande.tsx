@@ -6,6 +6,7 @@ import { EtapeCommande } from '../lib/commande-types';
 import { CreneauStep } from './commande/CreneauStep';
 import { InformationsClientStep } from './commande/InformationsClientStep';
 import { RecapitulatifStep } from './commande/RecapitulatifStep';
+import { PaiementStep } from './paiement/PaiementStep';
 import { ConfirmationStep } from './commande/ConfirmationStep';
 import { ProgressIndicator } from './commande/ProgressIndicator';
 import { NavigationButtons } from './commande/NavigationButtons';
@@ -28,6 +29,8 @@ export const ProcessusCommande: React.FC<ProcessusCommandeProps> = ({ isOpen, on
         return <InformationsClientStep />;
       case EtapeCommande.RECAPITULATIF:
         return <RecapitulatifStep />;
+      case EtapeCommande.PAIEMENT:
+        return <PaiementStep />;
       case EtapeCommande.CONFIRMATION:
         return <ConfirmationStep onClose={onClose} />;
       default:
@@ -75,7 +78,8 @@ export const ProcessusCommande: React.FC<ProcessusCommandeProps> = ({ isOpen, on
           </div>
 
           {/* Navigation */}
-          {processus.etapeActuelle !== EtapeCommande.CONFIRMATION && (
+          {processus.etapeActuelle !== EtapeCommande.CONFIRMATION && 
+           processus.etapeActuelle !== EtapeCommande.PAIEMENT && (
             <div className="border-t-2 border-boulangerie-or bg-boulangerie-beige p-6">
               <NavigationButtons onClose={onClose} />
             </div>

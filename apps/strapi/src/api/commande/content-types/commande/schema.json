@@ -82,6 +82,12 @@
     },
     "paiementReference": {
       "type": "string"
+    },
+    "evaluation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::evaluation.evaluation",
+      "mappedBy": "commande"
     }
   }
 }

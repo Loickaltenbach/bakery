@@ -89,6 +89,12 @@
       "relation": "oneToMany",
       "target": "api::produit.produit",
       "mappedBy": "categorie"
+    },
+    "codesPromo": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::code-promo.code-promo",
+      "inversedBy": "categoriesEligibles"
     }
   }
 }

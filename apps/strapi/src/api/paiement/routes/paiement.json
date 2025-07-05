@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/paiements/initier",
+      "handler": "paiement.initierPaiement",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/paiements/traiter",
+      "handler": "paiement.traiterPaiement",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/paiements/confirmer",
+      "handler": "paiement.confirmerPaiement",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/paiements/statut/:transactionId",
+      "handler": "paiement.obtenirStatut",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/paiements/generer-facture",
+      "handler": "paiement.genererFacture",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/paiements/envoyer-facture",
+      "handler": "paiement.envoyerFacture",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

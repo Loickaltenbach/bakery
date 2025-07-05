@@ -14,15 +14,15 @@ export default factories.createCoreController('api::utilisateur.utilisateur', ({
       }
 
       // Récupérer l'utilisateur étendu via la relation
-      const user = await strapi.entityService.findOne('plugin::users-permissions.user', userId, {
+      const user = await strapi.entityService.findOne('plugin::users-permissions.user' as any, userId, {
         populate: {
           utilisateur: {
             populate: ['commandes']
           }
-        }
+        } as any
       });
 
-      if (!user?.utilisateur) {
+      if (!(user as any)?.utilisateur) {
         return ctx.notFound('Profil utilisateur non trouvé');
       }
 
@@ -56,8 +56,8 @@ export default factories.createCoreController('api::utilisateur.utilisateur', ({
       }
 
       // Mettre à jour le profil utilisateur étendu
-      const user = await strapi.entityService.findOne('plugin::users-permissions.user', userId, {
-        populate: ['utilisateur']
+      const user = await strapi.entityService.findOne('plugin::users-permissions.user' as any, userId, {
+        populate: ['utilisateur'] as any
       });
 
       if ((user as any)?.utilisateur) {
@@ -88,8 +88,8 @@ export default factories.createCoreController('api::utilisateur.utilisateur', ({
         return ctx.unauthorized('Utilisateur non authentifié');
       }
 
-      const user = await strapi.entityService.findOne('plugin::users-permissions.user', userId, {
-        populate: ['utilisateur']
+      const user = await strapi.entityService.findOne('plugin::users-permissions.user' as any, userId, {
+        populate: ['utilisateur'] as any
       });
 
       if (!(user as any)?.utilisateur) {
@@ -101,7 +101,7 @@ export default factories.createCoreController('api::utilisateur.utilisateur', ({
           utilisateur: (user as any).utilisateur.id
         },
         sort: { dateCreation: 'desc' },
-        populate: ['utilisateur']
+        populate: ['utilisateur'] as any
       });
 
       ctx.body = commandes;

@@ -1,0 +1,86 @@
+{
+  "kind": "collectionType",
+  "collectionName": "codes_promo",
+  "info": {
+    "singularName": "code-promo",
+    "pluralName": "codes-promo",
+    "displayName": "Code Promo",
+    "description": "Codes promotionnels et réductions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 50,
+      "minLength": 3
+    },
+    "nom": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 500
+    },
+    "typeReduction": {
+      "type": "enumeration",
+      "enum": ["POURCENTAGE", "MONTANT_FIXE", "LIVRAISON_GRATUITE"],
+      "required": true,
+      "default": "POURCENTAGE"
+    },
+    "valeurReduction": {
+      "type": "decimal",
+      "required": true,
+      "min": 0
+    },
+    "montantMinimum": {
+      "type": "decimal",
+      "min": 0,
+      "default": 0
+    },
+    "dateDebut": {
+      "type": "datetime",
+      "required": true
+    },
+    "dateFin": {
+      "type": "datetime",
+      "required": true
+    },
+    "utilisationsMax": {
+      "type": "integer",
+      "min": 0
+    },
+    "utilisationsActuelles": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "actif": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "categoriesEligibles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::categorie.categorie",
+      "mappedBy": "codesPromo"
+    },
+    "produitsEligibles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::produit.produit",
+      "mappedBy": "codesPromo"
+    },
+    "premiereCommande": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

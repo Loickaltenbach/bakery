@@ -130,6 +130,12 @@
       "relation": "manyToOne",
       "target": "api::categorie.categorie",
       "inversedBy": "produits"
+    },
+    "codesPromo": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::code-promo.code-promo",
+      "inversedBy": "produitsEligibles"
     }
   }
 }

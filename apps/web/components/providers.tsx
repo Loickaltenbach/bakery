@@ -4,6 +4,7 @@ import * as React from "react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { PanierProvider } from "@/contexts/PanierContext"
 import { CommandeProvider } from "@/contexts/CommandeContext"
+import { PaiementProvider } from "@/contexts/PaiementContext"
 import { AuthProvider } from "@/contexts/AuthContext"
 import { ThemeProvider } from "@/contexts/ThemeContext"
 import { FavorisProvider } from "@/contexts/FavorisContext"
@@ -27,9 +28,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
               <FavorisProvider>
                 <CommandesRapidesProvider>
                   <PanierProvider>
-                    <CommandeProvider>
-                      {children}
-                    </CommandeProvider>
+                    <PaiementProvider>
+                      <CommandeProvider>
+                        {children}
+                      </CommandeProvider>
+                    </PaiementProvider>
                   </PanierProvider>
                 </CommandesRapidesProvider>
               </FavorisProvider>

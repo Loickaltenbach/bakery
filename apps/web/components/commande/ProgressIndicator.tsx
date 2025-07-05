@@ -8,7 +8,8 @@ import { Check } from 'lucide-react';
 const etapes = [
   { id: EtapeCommande.CRENEAU, nom: 'Créneau', description: 'Date et heure' },
   { id: EtapeCommande.INFORMATIONS_CLIENT, nom: 'Informations', description: 'Vos coordonnées' },
-  { id: EtapeCommande.RECAPITULATIF, nom: 'Récapitulatif', description: 'Vérification' }
+  { id: EtapeCommande.RECAPITULATIF, nom: 'Récapitulatif', description: 'Vérification' },
+  { id: EtapeCommande.PAIEMENT, nom: 'Paiement', description: 'Règlement' }
 ];
 
 export const ProgressIndicator: React.FC = () => {

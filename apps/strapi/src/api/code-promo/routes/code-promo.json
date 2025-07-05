@@ -1,0 +1,68 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/codes-promo",
+      "handler": "code-promo.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/codes-promo/actifs",
+      "handler": "code-promo.actifs",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/codes-promo/valider/:code",
+      "handler": "code-promo.valider",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/codes-promo/utiliser/:id",
+      "handler": "code-promo.utiliser",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/codes-promo/:id",
+      "handler": "code-promo.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/codes-promo",
+      "handler": "code-promo.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/codes-promo/:id",
+      "handler": "code-promo.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/codes-promo/:id",
+      "handler": "code-promo.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -21,7 +21,7 @@ export const NavigationButtons: React.FC<NavigationButtonsProps> = ({ onClose })
   } = useCommande();
 
   const handleSuivant = async () => {
-    if (processus.etapeActuelle === EtapeCommande.RECAPITULATIF) {
+    if (processus.etapeActuelle === EtapeCommande.PAIEMENT) {
       try {
         await finaliserCommande();
       } catch (error) {
@@ -39,6 +39,8 @@ export const NavigationButtons: React.FC<NavigationButtonsProps> = ({ onClose })
       case EtapeCommande.INFORMATIONS_CLIENT:
         return 'Récapitulatif';
       case EtapeCommande.RECAPITULATIF:
+        return 'Paiement';
+      case EtapeCommande.PAIEMENT:
         return 'Finaliser la commande';
       default:
         return 'Suivant';
@@ -46,7 +48,7 @@ export const NavigationButtons: React.FC<NavigationButtonsProps> = ({ onClose })
   };
 
   const getIconeBoutonSuivant = () => {
-    if (processus.etapeActuelle === EtapeCommande.RECAPITULATIF) {
+    if (processus.etapeActuelle === EtapeCommande.PAIEMENT) {
       return <CreditCard className="w-4 h-4 ml-2" />;
     }
     return <ArrowRight className="w-4 h-4 ml-2" />;
@@ -92,7 +94,7 @@ export const NavigationButtons: React.FC<NavigationButtonsProps> = ({ onClose })
         disabled={!peutAvancer()}
         className={`
           font-medium px-6 py-3 min-w-[200px]
-          ${processus.etapeActuelle === EtapeCommande.RECAPITULATIF 
+          ${processus.etapeActuelle === EtapeCommande.PAIEMENT 
             ? 'btn-boulangerie-primary text-lg' 
             : 'btn-boulangerie-primary'
           }

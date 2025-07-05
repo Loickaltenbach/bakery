@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "paiements",
+  "info": {
+    "singularName": "paiement",
+    "pluralName": "paiements",
+    "displayName": "Paiement",
+    "description": "Gestion des paiements et transactions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "transaction_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "commande_id": {
+      "type": "string",
+      "required": true
+    },
+    "montant": {
+      "type": "decimal",
+      "required": true
+    },
+    "devise": {
+      "type": "string",
+      "required": true,
+      "default": "EUR"
+    },
+    "statut": {
+      "type": "enumeration",
+      "enum": ["en_attente", "en_cours", "reussi", "echoue", "annule", "rembourse"],
+      "required": true,
+      "default": "en_attente"
+    },
+    "methode_paiement": {
+      "type": "enumeration",
+      "enum": ["carte_bancaire", "paypal", "virement", "especes"],
+      "required": true
+    },
+    "donnees_paiement": {
+      "type": "json",
+      "required": false
+    },
+    "code_promo_utilise": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::code-promo.code-promo"
+    },
+    "email_client": {
+      "type": "email",
+      "required": true
+    },
+    "nom_client": {
+      "type": "string",
+      "required": true
+    },
+    "adresse_facturation": {
+      "type": "json",
+      "required": false
+    },
+    "facture_envoyee": {
+      "type": "boolean",
+      "default": false
+    },
+    "date_facture": {
+      "type": "datetime",
+      "required": false
+    },
+    "notes": {
+      "type": "text",
+      "required": false
+    }
+  }
+}
