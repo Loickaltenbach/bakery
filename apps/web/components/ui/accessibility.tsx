@@ -35,9 +35,17 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
   const [reducedMotion, setReducedMotion] = useState(false)
   const [fontSize, setFontSize] = useState<'normal' | 'large' | 'xl'>('normal')
   const [keyboardNavigation, setKeyboardNavigation] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  // Marquer comme monté côté client
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Charger les préférences depuis localStorage
   useEffect(() => {
+    if (!mounted) return
+
     const savedContrast = localStorage.getItem('highContrast') === 'true'
     const savedMotion = localStorage.getItem('reducedMotion') === 'true'
     const savedFontSize = localStorage.getItem('fontSize') as 'normal' | 'large' | 'xl' || 'normal'
@@ -51,10 +59,12 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
     if (prefersReducedMotion) {
       setReducedMotion(true)
     }
-  }, [])
+  }, [mounted])
 
   // Appliquer les changements au document
   useEffect(() => {
+    if (!mounted) return
+
     document.documentElement.classList.toggle('high-contrast', highContrast)
     document.documentElement.classList.toggle('reduced-motion', reducedMotion)
     document.documentElement.classList.toggle('font-large', fontSize === 'large')
@@ -63,10 +73,12 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
     localStorage.setItem('highContrast', highContrast.toString())
     localStorage.setItem('reducedMotion', reducedMotion.toString())
     localStorage.setItem('fontSize', fontSize)
-  }, [highContrast, reducedMotion, fontSize])
+  }, [highContrast, reducedMotion, fontSize, mounted])
 
   // Détection de la navigation au clavier
   useEffect(() => {
+    if (!mounted) return
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Tab') {
         setKeyboardNavigation(true)
@@ -84,7 +96,7 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('mousedown', handleMouseDown)
     }
-  }, [])
+  }, [mounted])
 
   const announce = (message: string) => {
     setAnnouncements(prev => [...prev, message])
@@ -126,6 +138,16 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
 
 // Composant pour les annonces ARIA
 function LiveRegion({ announcements }: { announcements: string[] }) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
   return createPortal(
     <div
       aria-live="polite"
@@ -166,9 +188,14 @@ export function FocusTrap({
   active?: boolean 
 }) {
   const containerRef = React.useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    if (!active || !containerRef.current) return
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!active || !containerRef.current || !mounted) return
 
     const container = containerRef.current
     const focusableElements = container.querySelectorAll(
@@ -211,7 +238,7 @@ export function FocusTrap({
       document.removeEventListener('keydown', handleTabKey)
       document.removeEventListener('keydown', handleEscapeKey)
     }
-  }, [active])
+  }, [active, mounted])
 
   return (
     <div ref={containerRef}>
