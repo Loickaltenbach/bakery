@@ -18,24 +18,24 @@ export const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({
   onBasculerInscription,
   afficherBasculer = true
 }) => {
-  const { connexion, chargementAuth, erreurAuth, effacerErreur } = useAuth();
+  const { connexion, isLoading, erreur, viderErreur } = useAuth();
   
   const [formData, setFormData] = useState<InformationsConnexion>({
     email: '',
-    motDePasse: '',
-    seSouvenirDeMoi: false
+    password: '',
+    rememberMe: false
   });
   
-  const [afficherMotDePasse, setAfficherMotDePasse] = useState(false);
+  const [afficherpassword, setAfficherpassword] = useState(false);
   const [erreurs, setErreurs] = useState<string[]>([]);
 
   const handleChange = (field: keyof InformationsConnexion, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     
     // Effacer les erreurs quand l'utilisateur tape
-    if (erreurs.length > 0 || erreurAuth) {
+    if (erreurs.length > 0 || erreur) {
       setErreurs([]);
-      effacerErreur();
+      viderErreur();
     }
   };
 
@@ -48,7 +48,7 @@ export const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({
       nouvellesErreurs.push('Format d\'email invalide');
     }
     
-    if (!formData.motDePasse) {
+    if (!formData.password) {
       nouvellesErreurs.push('Le mot de passe est obligatoire');
     }
     
@@ -73,9 +73,9 @@ export const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({
   // Données de test pour faciliter le développement
   const remplirDonneesTest = (type: 'admin' | 'employe' | 'client') => {
     const donnees = {
-      admin: { email: 'admin@boulangerie-alsacienne.fr', motDePasse: 'admin123' },
-      employe: { email: 'marie@boulangerie-alsacienne.fr', motDePasse: 'employe123' },
-      client: { email: 'client@example.com', motDePasse: 'client123' }
+      admin: { email: 'admin@boulangerie-alsacienne.fr', password: 'admin123' },
+      employe: { email: 'marie@boulangerie-alsacienne.fr', password: 'employe123' },
+      client: { email: 'client@example.com', password: 'client123' }
     };
     
     setFormData(prev => ({
@@ -97,12 +97,12 @@ export const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({
         </div>
 
         {/* Affichage des erreurs */}
-        {(erreurs.length > 0 || erreurAuth) && (
+        {(erreurs.length > 0 || erreur) && (
           <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
             <div className="flex items-start gap-2">
               <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
               <div className="text-sm text-red-700">
-                {erreurAuth && <div>{erreurAuth}</div>}
+                {erreur && <div>{erreur}</div>}
                 {erreurs.map((erreur, index) => (
                   <div key={index}>{erreur}</div>
                 ))}
@@ -138,19 +138,19 @@ export const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-boulangerie-bordeaux-light" />
               <input
-                type={afficherMotDePasse ? 'text' : 'password'}
-                value={formData.motDePasse}
-                onChange={(e) => handleChange('motDePasse', e.target.value)}
+                type={afficherpassword ? 'text' : 'password'}
+                value={formData.password}
+                onChange={(e) => handleChange('password', e.target.value)}
                 className="w-full pl-10 pr-12 py-3 border border-boulangerie-beige rounded-lg focus:outline-none focus:ring-2 focus:ring-boulangerie-or focus:border-transparent"
                 placeholder="Votre mot de passe"
                 autoComplete="current-password"
               />
               <button
                 type="button"
-                onClick={() => setAfficherMotDePasse(!afficherMotDePasse)}
+                onClick={() => setAfficherpassword(!afficherpassword)}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-boulangerie-bordeaux-light hover:text-boulangerie-bordeaux"
               >
-                {afficherMotDePasse ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {afficherpassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
           </div>
@@ -159,12 +159,12 @@ export const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({
           <div className="flex items-center">
             <input
               type="checkbox"
-              id="seSouvenirDeMoi"
-              checked={formData.seSouvenirDeMoi}
-              onChange={(e) => handleChange('seSouvenirDeMoi', e.target.checked)}
+              id="rememberMe"
+              checked={formData.rememberMe}
+              onChange={(e) => handleChange('rememberMe', e.target.checked)}
               className="w-4 h-4 text-boulangerie-or bg-gray-100 border-gray-300 rounded focus:ring-boulangerie-or focus:ring-2"
             />
-            <label htmlFor="seSouvenirDeMoi" className="ml-2 text-sm text-boulangerie-bordeaux">
+            <label htmlFor="rememberMe" className="ml-2 text-sm text-boulangerie-bordeaux">
               Se souvenir de moi
             </label>
           </div>
@@ -172,10 +172,10 @@ export const FormulaireConnexion: React.FC<FormulaireConnexionProps> = ({
           {/* Bouton de connexion */}
           <Button
             type="submit"
-            disabled={chargementAuth}
+            disabled={isLoading}
             className="w-full btn-boulangerie-primary py-3"
           >
-            {chargementAuth ? 'Connexion...' : 'Se connecter'}
+            {isLoading ? 'Connexion...' : 'Se connecter'}
           </Button>
         </form>
 

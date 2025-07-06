@@ -5,7 +5,7 @@ import { Commande } from './commande-types';
 export interface Utilisateur {
   id: string;
   email: string;
-  motDePasse?: string; // Ne pas stocker en plain text en production
+  password?: string; // Ne pas stocker en plain text en production
   nom: string;
   prenom: string;
   telephone: string;
@@ -73,14 +73,14 @@ export interface SessionUtilisateur {
 
 export interface InformationsConnexion {
   email: string;
-  motDePasse: string;
-  seSouvenirDeMoi?: boolean;
+  password: string;
+  rememberMe?: boolean;
 }
 
 export interface InformationsInscription {
   email: string;
-  motDePasse: string;
-  confirmationMotDePasse: string;
+  password: string;
+  confirmationpassword: string;
   nom: string;
   prenom: string;
   telephone: string;

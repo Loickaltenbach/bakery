@@ -20,7 +20,7 @@ let utilisateursDB: Utilisateur[] = [
   {
     id: 'admin-1',
     email: 'admin@boulangerie-alsacienne.fr',
-    motDePasse: 'admin123', // En production, utilisez un hash
+    password: 'admin123', // En production, utilisez un hash
     nom: 'Müller',
     prenom: 'Hans',
     telephone: '+33 3 88 12 34 56',
@@ -34,7 +34,7 @@ let utilisateursDB: Utilisateur[] = [
   {
     id: 'employe-1',
     email: 'marie@boulangerie-alsacienne.fr',
-    motDePasse: 'employe123',
+    password: 'employe123',
     nom: 'Schmidt',
     prenom: 'Marie',
     telephone: '+33 3 88 12 34 57',
@@ -53,13 +53,13 @@ export function genererToken(): string {
   return Math.random().toString(36).substr(2) + Date.now().toString(36);
 }
 
-export function hashMotDePasse(motDePasse: string): string {
+export function hashpassword(password: string): string {
   // Simulation - en production, utilisez bcrypt ou similar
-  return btoa(motDePasse + 'salt_boulangerie');
+  return btoa(password + 'salt_boulangerie');
 }
 
-export function verifierMotDePasse(motDePasse: string, hash: string): boolean {
-  return hashMotDePasse(motDePasse) === hash;
+export function verifierpassword(password: string, hash: string): boolean {
+  return hashpassword(password) === hash;
 }
 
 // Validation des données
@@ -71,16 +71,16 @@ export function validerEmail(email: string): { valide: boolean; erreur?: string 
   return { valide: true };
 }
 
-export function validerMotDePasse(motDePasse: string): { valide: boolean; erreurs: string[] } {
+export function validerpassword(password: string): { valide: boolean; erreurs: string[] } {
   const erreurs: string[] = [];
   
-  if (motDePasse.length < 6) {
+  if (password.length < 6) {
     erreurs.push('Le mot de passe doit contenir au moins 6 caractères');
   }
-  if (!/[A-Z]/.test(motDePasse)) {
+  if (!/[A-Z]/.test(password)) {
     erreurs.push('Le mot de passe doit contenir au moins une majuscule');
   }
-  if (!/[0-9]/.test(motDePasse)) {
+  if (!/[0-9]/.test(password)) {
     erreurs.push('Le mot de passe doit contenir au moins un chiffre');
   }
   
@@ -102,13 +102,13 @@ export function validerInformationsInscription(infos: InformationsInscription): 
   }
   
   // Validation mot de passe
-  const validationMdp = validerMotDePasse(infos.motDePasse);
+  const validationMdp = validerpassword(infos.password);
   if (!validationMdp.valide) {
     erreurs.push(...validationMdp.erreurs);
   }
   
   // Confirmation mot de passe
-  if (infos.motDePasse !== infos.confirmationMotDePasse) {
+  if (infos.password !== infos.confirmationpassword) {
     erreurs.push('Les mots de passe ne correspondent pas');
   }
   
@@ -127,7 +127,7 @@ export function creerSession(utilisateur: Utilisateur): SessionUtilisateur {
   const dateExpiration = new Date(Date.now() + SESSION_DURATION);
   
   const session: SessionUtilisateur = {
-    utilisateur: { ...utilisateur, motDePasse: undefined }, // Ne pas exposer le mot de passe
+    utilisateur: { ...utilisateur, password: undefined }, // Ne pas exposer le mot de passe
     token,
     dateExpiration
   };
@@ -183,7 +183,7 @@ export async function seConnecter(infos: InformationsConnexion): Promise<Session
   }
   
   // En production, vérifier le hash du mot de passe
-  if (utilisateur.motDePasse !== infos.motDePasse) {
+  if (utilisateur.password !== infos.password) {
     throw new Error('Email ou mot de passe incorrect');
   }
   
@@ -199,7 +199,7 @@ export async function sInscrire(infos: InformationsInscription): Promise<Session
   const nouvelUtilisateur: Utilisateur = {
     id: `user-${Date.now()}`,
     email: infos.email,
-    motDePasse: infos.motDePasse, // En production, hasher le mot de passe
+    password: infos.password, // En production, hasher le mot de passe
     nom: infos.nom,
     prenom: infos.prenom,
     telephone: infos.telephone,

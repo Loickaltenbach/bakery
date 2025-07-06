@@ -1,0 +1,216 @@
+/* Thème Boulangerie Alsacienne - Version Améliorée avec Contraste Élevé */
+:root {
+  /* Couleurs principales - Version contraste élevé */
+  --boulangerie-bordeaux: #5D1E26;        /* Plus foncé pour meilleur contraste */
+  --boulangerie-bordeaux-light: #8B3A47;   /* Tonalité moyenne */
+  --boulangerie-bordeaux-dark: #4A1A20;    /* Très foncé */
+  --boulangerie-or: #B8941F;               /* Or plus foncé pour meilleur contraste */
+  --boulangerie-or-light: #D4AF37;         /* Or standard */
+  --boulangerie-or-dark: #9D7E1A;          /* Or très foncé */
+  
+  /* Couleurs de support avec contraste amélioré */
+  --boulangerie-cream: #FAF7F0;
+  --boulangerie-beige: #F0EBE1;
+  --boulangerie-brown-light: #7A4B2E;
+  --boulangerie-brown-dark: #543018;
+  
+  /* Couleurs spéciales pour l'accessibilité */
+  --boulangerie-text-primary: #2C1810;     /* Texte principal très foncé */
+  --boulangerie-text-secondary: #5D4037;   /* Texte secondaire */
+  --boulangerie-text-light: #FFFFFF;       /* Texte sur fond foncé */
+  --boulangerie-text-muted: #8D6E63;       /* Texte atténué mais lisible */
+  
+  /* Backgrounds avec contraste */
+  --boulangerie-bg-primary: #FFFFFF;
+  --boulangerie-bg-secondary: #FAF7F0;
+  --boulangerie-bg-accent: #F5F1E8;
+  
+  /* Mode sombre - Couleurs avec contraste élevé */
+  --boulangerie-dark-bg-primary: #1A0E11;     /* Fond principal très foncé */
+  --boulangerie-dark-bg-secondary: #2D1B1F;   /* Fond secondaire */
+  --boulangerie-dark-bg-accent: #3D2B2F;      /* Fond accent */
+  --boulangerie-dark-text-primary: #F5F1E8;   /* Texte principal clair */
+  --boulangerie-dark-text-secondary: #E0D4C7; /* Texte secondaire */
+  --boulangerie-dark-text-muted: #B8A99A;     /* Texte atténué mais lisible */
+  
+  /* Gradients améliorés */
+  --gradient-bordeaux-or: linear-gradient(135deg, var(--boulangerie-bordeaux) 0%, var(--boulangerie-or) 100%);
+  --gradient-or-cream: linear-gradient(135deg, var(--boulangerie-or) 0%, var(--boulangerie-cream) 100%);
+  --gradient-dark-bordeaux: linear-gradient(135deg, var(--boulangerie-bordeaux-dark) 0%, var(--boulangerie-bordeaux) 100%);
+  
+  /* Shadows avec couleurs bordeaux */
+  --shadow-bordeaux: 0 4px 12px rgba(93, 30, 38, 0.25);
+  --shadow-or: 0 4px 12px rgba(184, 148, 31, 0.25);
+  --shadow-elevation: 0 8px 32px rgba(93, 30, 38, 0.18);
+  --shadow-strong: 0 12px 48px rgba(93, 30, 38, 0.3);
+}
+
+/* Mode sombre */
+.dark {
+  --boulangerie-text-primary: var(--boulangerie-dark-text-primary);
+  --boulangerie-text-secondary: var(--boulangerie-dark-text-secondary);
+  --boulangerie-text-muted: var(--boulangerie-dark-text-muted);
+  --boulangerie-bg-primary: var(--boulangerie-dark-bg-primary);
+  --boulangerie-bg-secondary: var(--boulangerie-dark-bg-secondary);
+  --boulangerie-bg-accent: var(--boulangerie-dark-bg-accent);
+}
+
+/* Classes utilitaires avec contraste élevé */
+.bg-boulangerie-bordeaux { background-color: var(--boulangerie-bordeaux); }
+.bg-boulangerie-bordeaux-light { background-color: var(--boulangerie-bordeaux-light); }
+.bg-boulangerie-bordeaux-dark { background-color: var(--boulangerie-bordeaux-dark); }
+.bg-boulangerie-or { background-color: var(--boulangerie-or); }
+.bg-boulangerie-or-light { background-color: var(--boulangerie-or-light); }
+.bg-boulangerie-or-dark { background-color: var(--boulangerie-or-dark); }
+.bg-boulangerie-cream { background-color: var(--boulangerie-cream); }
+.bg-boulangerie-beige { background-color: var(--boulangerie-beige); }
+
+/* Textes avec contraste amélioré */
+.text-boulangerie-bordeaux { color: var(--boulangerie-bordeaux); }
+.text-boulangerie-bordeaux-light { color: var(--boulangerie-bordeaux-light); }
+.text-boulangerie-bordeaux-dark { color: var(--boulangerie-bordeaux-dark); }
+.text-boulangerie-or { color: var(--boulangerie-or); }
+.text-boulangerie-or-light { color: var(--boulangerie-or-light); }
+.text-boulangerie-or-dark { color: var(--boulangerie-or-dark); }
+.text-boulangerie-cream { color: var(--boulangerie-cream); }
+
+/* Classes sémantiques pour l'accessibilité */
+.text-primary { color: var(--boulangerie-text-primary); }
+.text-secondary { color: var(--boulangerie-text-secondary); }
+.text-muted { color: var(--boulangerie-text-muted); }
+.bg-primary { background-color: var(--boulangerie-bg-primary); }
+.bg-secondary { background-color: var(--boulangerie-bg-secondary); }
+.bg-accent { background-color: var(--boulangerie-bg-accent); }
+
+/* Bordures */
+.border-boulangerie-bordeaux { border-color: var(--boulangerie-bordeaux); }
+.border-boulangerie-or { border-color: var(--boulangerie-or); }
+
+/* Gradients */
+.bg-gradient-bordeaux-or { background: var(--gradient-bordeaux-or); }
+.bg-gradient-or-cream { background: var(--gradient-or-cream); }
+.bg-gradient-dark-bordeaux { background: var(--gradient-dark-bordeaux); }
+
+/* Shadows personnalisées */
+.shadow-bordeaux { box-shadow: var(--shadow-bordeaux); }
+.shadow-or { box-shadow: var(--shadow-or); }
+.shadow-elevation { box-shadow: var(--shadow-elevation); }
+.shadow-strong { box-shadow: var(--shadow-strong); }
+
+/* Styles spéciaux pour les boutons avec contraste élevé */
+.btn-boulangerie-primary {
+  background: var(--boulangerie-or);
+  color: var(--boulangerie-text-light);
+  border: 2px solid var(--boulangerie-or-dark);
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-boulangerie-primary:hover {
+  background: var(--boulangerie-or-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevation);
+  border-color: var(--boulangerie-bordeaux);
+}
+
+.btn-boulangerie-primary:focus {
+  outline: 3px solid var(--boulangerie-or-light);
+  outline-offset: 2px;
+}
+
+.btn-boulangerie-secondary {
+  background: var(--boulangerie-bordeaux-light);
+  color: var(--boulangerie-text-light);
+  border: 2px solid var(--boulangerie-bordeaux);
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-boulangerie-secondary:hover {
+  background: var(--boulangerie-bordeaux);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-bordeaux);
+}
+
+.btn-boulangerie-secondary:focus {
+  outline: 3px solid var(--boulangerie-bordeaux-light);
+  outline-offset: 2px;
+}
+
+/* Navigation avec contraste élevé */
+.nav-link {
+  color: var(--boulangerie-bordeaux);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  color: var(--boulangerie-or);
+  border-bottom-color: var(--boulangerie-or);
+}
+
+.nav-link.active {
+  color: var(--boulangerie-or);
+  font-weight: 700;
+  border-bottom-color: var(--boulangerie-or);
+}
+
+.dark .nav-link {
+  color: var(--boulangerie-dark-text-primary);
+}
+
+.dark .nav-link:hover,
+.dark .nav-link.active {
+  color: var(--boulangerie-or-light);
+  border-bottom-color: var(--boulangerie-or-light);
+}
+
+/* Cards avec contraste amélioré */
+.card-boulangerie {
+  background: var(--boulangerie-bg-primary);
+  border: 2px solid var(--boulangerie-or-light);
+  box-shadow: var(--shadow-or);
+  transition: all 0.3s ease;
+}
+
+.card-boulangerie:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevation);
+  border-color: var(--boulangerie-or);
+}
+
+.dark .card-boulangerie {
+  background: var(--boulangerie-dark-bg-secondary);
+  border-color: var(--boulangerie-bordeaux-light);
+}
+
+/* Focus visible amélioré pour l'accessibilité */
+*:focus-visible {
+  outline: 3px solid var(--boulangerie-or);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Contraste élevé pour les éléments interactifs */
+.interactive:hover {
+  background-color: var(--boulangerie-or-light);
+  color: var(--boulangerie-bordeaux-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-bordeaux);
+}
+
+/* Mode contraste élevé (pour l'accessibilité) */
+@media (prefers-contrast: high) {
+  :root {
+    --boulangerie-bordeaux: #4A0008;
+    --boulangerie-or: #996B00;
+    --boulangerie-text-primary: #000000;
+    --boulangerie-bg-primary: #FFFFFF;
+  }
+  
+  .dark {
+    --boulangerie-text-primary: #FFFFFF;
+    --boulangerie-bg-primary: #000000;
+  }
+}

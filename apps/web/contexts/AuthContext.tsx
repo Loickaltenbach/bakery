@@ -5,7 +5,8 @@ import { authApi, type RegisterData, type LoginData, type AuthResponse } from '@
 import type { 
   Utilisateur, 
   PreferencesUtilisateur, 
-  AdresseUtilisateur
+  AdresseUtilisateur,
+  InformationsConnexion
 } from '@/lib/auth-types';
 import { RoleUtilisateur } from '@/lib/auth-types';
 import type { Commande, CommandeStrapi } from '@/lib/commande-types';
@@ -17,7 +18,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
 
   // Actions d'authentification
-  connexion: (email: string, motDePasse: string) => Promise<void>;
+  connexion: (formData: InformationsConnexion) => Promise<void>;
   inscription: (donnees: DonneesInscription) => Promise<void>;
   deconnexion: () => void;
 
@@ -40,7 +41,7 @@ interface AuthContextType {
 
 interface DonneesInscription {
   email: string;
-  motDePasse: string;
+  password: string;
   nom: string;
   prenom: string;
   telephone: string;
@@ -105,14 +106,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Connexion
-  const connexion = async (email: string, motDePasse: string) => {
+  const connexion = async (formData: InformationsConnexion) => {
     try {
       setIsLoading(true);
       setErreur(null);
 
       const loginData: LoginData = {
-        identifier: email,
-        password: motDePasse
+        identifier: formData.email,
+        password: formData.password
       };
 
       const response = await authApi.login(loginData);
@@ -144,7 +145,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       const registerData: RegisterData = {
         email: donnees.email,
-        password: donnees.motDePasse,
+        password: donnees.password,
         nom: donnees.nom,
         prenom: donnees.prenom,
         telephone: donnees.telephone

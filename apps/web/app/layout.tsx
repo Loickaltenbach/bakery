@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Crimson_Text, Playfair_Display } from "next/font/goo
 
 import "@workspace/ui/globals.css"
 import "../styles/boulangerie-theme.css"
+import "../styles/boulangerie-theme-improved.css"
 import "../styles/accessibility.css"
 import { Providers } from "@/components/providers"
 import { SkipLinks } from "@/components/ui/accessibility"

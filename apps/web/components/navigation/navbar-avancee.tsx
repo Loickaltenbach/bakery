@@ -35,8 +35,7 @@ const navItems: NavItem[] = [
   { label: 'Accueil', href: '/' },
   { label: 'Produits', href: '/produits' },
   { label: 'Commandes', href: '/commandes' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Mon Compte', href: '/compte' }
+  { label: 'Contact', href: '/contact' }
 ]
 
 export function NavbarAvancee() {
@@ -89,16 +88,16 @@ export function NavbarAvancee() {
   // Ne pas rendre avant l'hydratation
   if (!mounted) {
     return (
-      <nav className="sticky top-0 z-50 w-full border-b border-boulangerie-gold/20 bg-white/95 backdrop-blur-sm transition-all duration-300 dark:border-amber-500/20 dark:bg-boulangerie-marron/95">
+      <nav className="sticky top-0 z-50 w-full border-b border-boulangerie-or/30 bg-boulangerie-cream/95 backdrop-blur-sm transition-all duration-300 dark:border-boulangerie-bordeaux-light/40 dark:bg-boulangerie-bordeaux-dark/95">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link 
               href="/" 
-              className="flex items-center space-x-2 text-boulangerie-marron transition-colors hover:text-boulangerie-gold dark:text-amber-100 dark:hover:text-amber-300"
+              className="flex items-center space-x-2 text-boulangerie-bordeaux transition-colors hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:text-boulangerie-or-light"
               aria-label="Retour à l'accueil"
             >
-              <div className="h-8 w-8 rounded-full bg-gradient-to-br from-boulangerie-gold to-amber-600 flex items-center justify-center">
+              <div className="h-8 w-8 rounded-full bg-gradient-bordeaux-or flex items-center justify-center shadow-bordeaux">
                 <span className="text-white font-bold text-sm">B</span>
               </div>
               <span className="hidden font-artisan text-xl font-semibold sm:block">
@@ -113,10 +112,10 @@ export function NavbarAvancee() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "text-sm font-medium transition-colors hover:text-boulangerie-gold dark:hover:text-amber-300",
+                    "text-sm font-medium transition-colors hover:text-boulangerie-or dark:hover:text-boulangerie-or-light",
                     pathname === item.href
-                      ? "text-boulangerie-gold dark:text-amber-300"
-                      : "text-boulangerie-marron dark:text-amber-100"
+                      ? "text-boulangerie-or dark:text-boulangerie-or-light font-semibold"
+                      : "text-boulangerie-bordeaux dark:text-boulangerie-cream"
                   )}
                 >
                   {item.label}
@@ -149,16 +148,16 @@ export function NavbarAvancee() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-boulangerie-gold/20 bg-white/95 backdrop-blur-sm transition-all duration-300 dark:border-amber-500/20 dark:bg-boulangerie-marron/95">
+    <nav className="sticky top-0 z-50 w-full border-b border-boulangerie-or/30 bg-boulangerie-cream/95 backdrop-blur-sm transition-all duration-300 dark:border-boulangerie-bordeaux-light/40 dark:bg-boulangerie-bordeaux-dark/95">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link 
             href="/" 
-            className="flex items-center space-x-2 text-boulangerie-marron transition-colors hover:text-boulangerie-gold dark:text-amber-100 dark:hover:text-amber-300"
+            className="flex items-center space-x-2 text-boulangerie-bordeaux transition-colors hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:text-boulangerie-or-light"
             aria-label="Retour à l'accueil"
           >
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-boulangerie-gold to-amber-600 flex items-center justify-center">
+            <div className="h-8 w-8 rounded-full bg-gradient-bordeaux-or flex items-center justify-center shadow-bordeaux">
               <span className="text-white font-bold text-sm">B</span>
             </div>
             <span className="hidden font-artisan text-xl font-semibold sm:block">
@@ -173,10 +172,10 @@ export function NavbarAvancee() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-boulangerie-gold dark:hover:text-amber-300",
+                  "text-sm font-medium transition-colors hover:text-boulangerie-or dark:hover:text-boulangerie-or-light",
                   pathname === item.href
-                    ? "text-boulangerie-gold dark:text-amber-300"
-                    : "text-boulangerie-marron dark:text-amber-100"
+                    ? "text-boulangerie-or dark:text-boulangerie-or-light font-semibold"
+                    : "text-boulangerie-bordeaux dark:text-boulangerie-cream"
                 )}
               >
                 {item.label}
@@ -217,7 +216,7 @@ export function NavbarAvancee() {
             {/* Recherche */}
             <Link 
               href="/recherche"
-              className="rounded-full p-2 text-boulangerie-marron transition-colors hover:bg-boulangerie-gold/10 hover:text-boulangerie-gold dark:text-amber-100 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
+              className="rounded-full p-2 text-boulangerie-bordeaux transition-colors hover:bg-boulangerie-or/10 hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:bg-boulangerie-bordeaux-light/20 dark:hover:text-boulangerie-or-light"
               aria-label="Rechercher des produits"
             >
               <Search className="h-5 w-5" />
@@ -228,13 +227,13 @@ export function NavbarAvancee() {
               <button
                 onClick={() => setIsCommandesRapidesOpen(!isCommandesRapidesOpen)}
                 onKeyDown={(e) => handleKeyDown(e, () => setIsCommandesRapidesOpen(!isCommandesRapidesOpen))}
-                className="relative rounded-full p-2 text-boulangerie-marron transition-colors hover:bg-boulangerie-gold/10 hover:text-boulangerie-gold dark:text-amber-100 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
+                className="relative rounded-full p-2 text-boulangerie-bordeaux transition-colors hover:bg-boulangerie-or/10 hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:bg-boulangerie-bordeaux-light/20 dark:hover:text-boulangerie-or-light"
                 aria-label="Commandes rapides"
                 aria-expanded={isCommandesRapidesOpen}
               >
                 <Zap className="h-5 w-5" />
                 {commandesRapides.length > 0 && (
-                  <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-boulangerie-gold text-xs text-white">
+                  <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-boulangerie-or text-xs text-white">
                     {commandesRapides.length}
                   </span>
                 )}
@@ -267,7 +266,7 @@ export function NavbarAvancee() {
                       ))}
                       <Link
                         href="/commandes-rapides"
-                        className="block text-center text-sm text-boulangerie-gold hover:underline dark:text-amber-300"
+                        className="block text-center text-sm text-boulangerie-or hover:underline dark:text-boulangerie-or-light"
                       >
                         Voir toutes
                       </Link>
@@ -280,7 +279,7 @@ export function NavbarAvancee() {
             {/* Favoris */}
             <Link
               href="/favoris"
-              className="relative rounded-full p-2 text-boulangerie-marron transition-colors hover:bg-boulangerie-gold/10 hover:text-boulangerie-gold dark:text-amber-100 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
+              className="relative rounded-full p-2 text-boulangerie-bordeaux transition-colors hover:bg-boulangerie-or/10 hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:bg-boulangerie-bordeaux-light/20 dark:hover:text-boulangerie-or-light"
               aria-label="Mes favoris"
             >
               <Heart className="h-5 w-5" />
@@ -294,12 +293,12 @@ export function NavbarAvancee() {
             {/* Panier */}
             <Link
               href="/panier"
-              className="relative rounded-full p-2 text-boulangerie-marron transition-colors hover:bg-boulangerie-gold/10 hover:text-boulangerie-gold dark:text-amber-100 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
+              className="relative rounded-full p-2 text-boulangerie-bordeaux transition-colors hover:bg-boulangerie-or/10 hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:bg-boulangerie-bordeaux-light/20 dark:hover:text-boulangerie-or-light"
               aria-label="Mon panier"
             >
               <ShoppingCart className="h-5 w-5" />
               {totalItems > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-boulangerie-gold text-xs text-white">
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-boulangerie-or text-xs text-white">
                   {totalItems}
                 </span>
               )}
@@ -310,7 +309,7 @@ export function NavbarAvancee() {
               <button
                 onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
                 onKeyDown={(e) => handleKeyDown(e, () => setIsThemeMenuOpen(!isThemeMenuOpen))}
-                className="rounded-full p-2 text-boulangerie-marron transition-colors hover:bg-boulangerie-gold/10 hover:text-boulangerie-gold dark:text-amber-100 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
+                className="rounded-full p-2 text-boulangerie-bordeaux transition-colors hover:bg-boulangerie-or/10 hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:bg-boulangerie-bordeaux-light/20 dark:hover:text-boulangerie-or-light"
                 aria-label="Changer le thème"
                 aria-expanded={isThemeMenuOpen}
               >
@@ -351,7 +350,7 @@ export function NavbarAvancee() {
             {/* Compte utilisateur */}
             <Link
               href="/compte"
-              className="rounded-full p-2 text-boulangerie-marron transition-colors hover:bg-boulangerie-gold/10 hover:text-boulangerie-gold dark:text-amber-100 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
+              className="rounded-full p-2 text-boulangerie-bordeaux transition-colors hover:bg-boulangerie-or/10 hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:bg-boulangerie-bordeaux-light/20 dark:hover:text-boulangerie-or-light"
               aria-label="Mon compte"
             >
               <User className="h-5 w-5" />
@@ -360,7 +359,7 @@ export function NavbarAvancee() {
             {/* Menu mobile */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="rounded-full p-2 text-boulangerie-marron transition-colors hover:bg-boulangerie-gold/10 hover:text-boulangerie-gold md:hidden dark:text-amber-100 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
+              className="rounded-full p-2 text-boulangerie-bordeaux transition-colors hover:bg-boulangerie-or/10 hover:text-boulangerie-or md:hidden dark:text-boulangerie-cream dark:hover:bg-boulangerie-bordeaux-light/20 dark:hover:text-boulangerie-or-light"
               aria-label="Ouvrir le menu"
               aria-expanded={isMenuOpen}
             >
@@ -381,8 +380,8 @@ export function NavbarAvancee() {
                   className={cn(
                     "block px-3 py-2 text-base font-medium transition-colors",
                     pathname === item.href
-                      ? "text-boulangerie-gold dark:text-amber-300"
-                      : "text-boulangerie-marron hover:text-boulangerie-gold dark:text-amber-100 dark:hover:text-amber-300"
+                      ? "text-boulangerie-or dark:text-boulangerie-or-light"
+                      : "text-boulangerie-bordeaux hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:text-boulangerie-or-light"
                   )}
                 >
                   {item.label}

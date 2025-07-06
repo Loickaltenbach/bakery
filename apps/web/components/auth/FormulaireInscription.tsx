@@ -22,8 +22,8 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
   
   const [formData, setFormData] = useState<InformationsInscription>({
     email: '',
-    motDePasse: '',
-    confirmationMotDePasse: '',
+    password: '',
+    confirmationpassword: '',
     nom: '',
     prenom: '',
     telephone: '',
@@ -31,7 +31,7 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
     accepteNewsletter: false
   });
   
-  const [afficherMotDePasse, setAfficherMotDePasse] = useState(false);
+  const [afficherpassword, setAfficherpassword] = useState(false);
   const [afficherConfirmation, setAfficherConfirmation] = useState(false);
   const [erreurs, setErreurs] = useState<string[]>([]);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -62,24 +62,24 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
         }
         break;
         
-      case 'motDePasse':
-        if (!formData.motDePasse) {
+      case 'password':
+        if (!formData.password) {
           erreursChamp.push('Le mot de passe est obligatoire');
         } else {
-          if (formData.motDePasse.length < 6) {
+          if (formData.password.length < 6) {
             erreursChamp.push('Le mot de passe doit contenir au moins 6 caractères');
           }
-          if (!/[A-Z]/.test(formData.motDePasse)) {
+          if (!/[A-Z]/.test(formData.password)) {
             erreursChamp.push('Le mot de passe doit contenir au moins une majuscule');
           }
-          if (!/[0-9]/.test(formData.motDePasse)) {
+          if (!/[0-9]/.test(formData.password)) {
             erreursChamp.push('Le mot de passe doit contenir au moins un chiffre');
           }
         }
         break;
         
-      case 'confirmationMotDePasse':
-        if (formData.motDePasse !== formData.confirmationMotDePasse) {
+      case 'confirmationpassword':
+        if (formData.password !== formData.confirmationpassword) {
           erreursChamp.push('Les mots de passe ne correspondent pas');
         }
         break;
@@ -142,8 +142,8 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
   };
 
   // Vérifier la force du mot de passe
-  const obtenirForceMotDePasse = (): { force: number; label: string; couleur: string } => {
-    const mdp = formData.motDePasse;
+  const obtenirForcepassword = (): { force: number; label: string; couleur: string } => {
+    const mdp = formData.password;
     let score = 0;
     
     if (mdp.length >= 6) score++;
@@ -158,7 +158,7 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
     return { force: score, label: 'Fort', couleur: 'bg-green-500' };
   };
 
-  const forceMotDePasse = obtenirForceMotDePasse();
+  const forcepassword = obtenirForcepassword();
 
   return (
     <Card className="w-full max-w-lg mx-auto">
@@ -286,12 +286,12 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-boulangerie-bordeaux-light" />
               <input
-                type={afficherMotDePasse ? 'text' : 'password'}
-                value={formData.motDePasse}
-                onChange={(e) => handleChange('motDePasse', e.target.value)}
-                onBlur={() => handleBlur('motDePasse')}
+                type={afficherpassword ? 'text' : 'password'}
+                value={formData.password}
+                onChange={(e) => handleChange('password', e.target.value)}
+                onBlur={() => handleBlur('password')}
                 className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-boulangerie-or focus:border-transparent ${
-                  touched.motDePasse && validerChamp('motDePasse').length > 0 
+                  touched.password && validerChamp('password').length > 0 
                     ? 'border-red-300 bg-red-50' 
                     : 'border-boulangerie-beige'
                 }`}
@@ -300,25 +300,25 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
               />
               <button
                 type="button"
-                onClick={() => setAfficherMotDePasse(!afficherMotDePasse)}
+                onClick={() => setAfficherpassword(!afficherpassword)}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-boulangerie-bordeaux-light hover:text-boulangerie-bordeaux"
               >
-                {afficherMotDePasse ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {afficherpassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
             
             {/* Indicateur de force du mot de passe */}
-            {formData.motDePasse && (
+            {formData.password && (
               <div className="mt-2">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="flex-1 bg-gray-200 rounded-full h-2">
                     <div 
-                      className={`h-2 rounded-full transition-all ${forceMotDePasse.couleur}`}
-                      style={{ width: `${(forceMotDePasse.force / 6) * 100}%` }}
+                      className={`h-2 rounded-full transition-all ${forcepassword.couleur}`}
+                      style={{ width: `${(forcepassword.force / 6) * 100}%` }}
                     />
                   </div>
                   <span className="text-xs text-boulangerie-bordeaux-light">
-                    {forceMotDePasse.label}
+                    {forcepassword.label}
                   </span>
                 </div>
               </div>
@@ -334,11 +334,11 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-boulangerie-bordeaux-light" />
               <input
                 type={afficherConfirmation ? 'text' : 'password'}
-                value={formData.confirmationMotDePasse}
-                onChange={(e) => handleChange('confirmationMotDePasse', e.target.value)}
-                onBlur={() => handleBlur('confirmationMotDePasse')}
+                value={formData.confirmationpassword}
+                onChange={(e) => handleChange('confirmationpassword', e.target.value)}
+                onBlur={() => handleBlur('confirmationpassword')}
                 className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-boulangerie-or focus:border-transparent ${
-                  touched.confirmationMotDePasse && validerChamp('confirmationMotDePasse').length > 0 
+                  touched.confirmationpassword && validerChamp('confirmationpassword').length > 0 
                     ? 'border-red-300 bg-red-50' 
                     : 'border-boulangerie-beige'
                 }`}
@@ -355,9 +355,9 @@ export const FormulaireInscription: React.FC<FormulaireInscriptionProps> = ({
             </div>
             
             {/* Validation visuelle de la confirmation */}
-            {formData.confirmationMotDePasse && (
+            {formData.confirmationpassword && (
               <div className="mt-1 flex items-center gap-2">
-                {formData.motDePasse === formData.confirmationMotDePasse ? (
+                {formData.password === formData.confirmationpassword ? (
                   <>
                     <Check className="w-4 h-4 text-green-500" />
                     <span className="text-xs text-green-600">Les mots de passe correspondent</span>
