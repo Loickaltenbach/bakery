@@ -1,21 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { RoleUtilisateur } from '@/lib/auth-types';
 import { Button } from '@workspace/ui/components/button';
 import { Card, CardContent } from '@workspace/ui/components/card';
 import { Shield, LogIn, AlertTriangle } from 'lucide-react';
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { utilisateurActuel, estConnecte, chargementAuth } = useAuth();
+interface AdminLayoutProps {
+  children: ReactNode;
+}
+
+export default function AdminLayout({ children }: AdminLayoutProps) {
+  const { utilisateur, isAuthenticated, isLoading } = useAuth();
 
   // Affichage de chargement
-  if (chargementAuth) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card>
@@ -29,7 +29,7 @@ export default function AdminLayout({
   }
 
   // Utilisateur non connecté
-  if (!estConnecte || !utilisateurActuel) {
+  if (!isAuthenticated || !utilisateur) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card>
@@ -50,8 +50,8 @@ export default function AdminLayout({
 
   // Vérifier les permissions (admin ou employé)
   const aAccesAdmin = 
-    utilisateurActuel.role === RoleUtilisateur.ADMIN || 
-    utilisateurActuel.role === RoleUtilisateur.EMPLOYE;
+    utilisateur.role === RoleUtilisateur.ADMIN || 
+    utilisateur.role === RoleUtilisateur.EMPLOYE;
 
   if (!aAccesAdmin) {
     return (
@@ -92,10 +92,10 @@ export default function AdminLayout({
             <Shield className="h-4 w-4" />
             <span>Interface d'administration</span>
             <span className="text-gray-400">•</span>
-            <span>Connecté en tant que {utilisateurActuel.prenom} {utilisateurActuel.nom}</span>
+            <span>Connecté en tant que {utilisateur.prenom} {utilisateur.nom}</span>
             <span className="text-gray-400">•</span>
             <span className="font-medium text-blue-600">
-              {utilisateurActuel.role === RoleUtilisateur.ADMIN ? 'Administrateur' : 'Employé'}
+              {utilisateur.role === RoleUtilisateur.ADMIN ? 'Administrateur' : 'Employé'}
             </span>
           </div>
           <Button 

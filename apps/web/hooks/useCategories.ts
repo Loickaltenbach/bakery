@@ -1,44 +1,52 @@
-import { useState, useEffect } from 'react';
-import { useApi } from './useApi';
-import { categoriesAPI, Categorie } from '../lib/api';
-import { categoriesTest } from '../lib/test-data';
+import { useState, useEffect } from 'react'
+import { boulangerieAPI, type Categorie } from '@/lib/boulangerie-api'
 
 export function useCategories() {
-  const [useTestData, setUseTestData] = useState(false);
-  const { data: categories, loading, error, execute } = useApi<Categorie[]>();
+  const [categories, setCategories] = useState<Categorie[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const fetchCategories = async () => {
+  const chargerCategories = async () => {
     try {
-      const response = await categoriesAPI.getAll();
+      setLoading(true)
+      setError(null)
       
-      if (response.data.length === 0) {
-        throw new Error('Aucune catégorie disponible dans Strapi');
+      const response = await boulangerieAPI.categories.getAll()
+      
+      if ((response as any).success) {
+        // Ajouter la catégorie "Tous"
+        const toutesCategories = [
+          { 
+            id: "tous", 
+            nom: "Tous nos produits", 
+            icon: "🍽️", 
+            description: "", 
+            produits_count: 0, 
+            actif: true 
+          },
+          ...(response as any).data
+        ]
+        setCategories(toutesCategories)
+      } else {
+        throw new Error('Erreur lors du chargement des catégories')
       }
-      
-      return response.data;
-    } catch (error) {
-      // Fallback vers les données de test
-      setUseTestData(true);
-      return categoriesTest;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Erreur lors du chargement'
+      setError(message)
+      console.error('Erreur catégories:', err)
+    } finally {
+      setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    execute(fetchCategories);
-  }, [execute]);
-
-  // Fonction pour trouver une catégorie par ID
-  const getCategorieById = (id: number | null) => {
-    if (!categories || id === null) return null;
-    return categories.find(cat => cat.id === id) || null;
-  };
+    chargerCategories()
+  }, [])
 
   return {
-    categories: categories || [],
+    categories,
     loading,
     error,
-    useTestData,
-    getCategorieById,
-    refetch: () => execute(fetchCategories),
-  };
+    refetch: chargerCategories
+  }
 }
