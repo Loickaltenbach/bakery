@@ -15,6 +15,7 @@ import {
   Sparkles
 } from 'lucide-react'
 import Link from 'next/link'
+import { Logo } from '@/components/ui/logo'
 import { cn } from '@workspace/ui/lib/utils'
 
 const fadeInUp = {
@@ -74,8 +75,18 @@ export function HomePage() {
           >
             <motion.div
               variants={fadeInUp}
-              className="mb-6"
+              className="mb-6 flex flex-col items-center"
             >
+              {/* Logo central */}
+              <motion.div
+                variants={fadeInUp}
+                className="mb-4"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Logo size="xl" showText={false} href="/" />
+              </motion.div>
+
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-boulangerie-or/15 text-boulangerie-bordeaux-dark dark:text-boulangerie-or-light rounded-full text-sm font-semibold border border-boulangerie-or/30 shadow-sm">
                 <Sparkles className="h-4 w-4" />
                 Tradition artisanale depuis 1985
@@ -136,6 +147,11 @@ export function HomePage() {
         >
           <div className="w-64 h-64 bg-gradient-to-br from-boulangerie-or/25 to-boulangerie-or-light/20 rounded-full blur-3xl"></div>
         </motion.div>
+
+        {/* Logo */}
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <Logo size="xl" showText={false} className="w-32 sm:w-40 lg:w-48" />
+        </div>
       </section>
 
       {/* Section Caractéristiques */}
@@ -311,63 +327,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Section Contact/Infos */}
-      <section className="py-16 bg-boulangerie-bordeaux text-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-          >
-            <div className="lg:col-span-2">
-              <h2 className="text-2xl font-artisan font-bold mb-4">
-                Venez nous rendre visite
-              </h2>
-              <p className="text-boulangerie-or-light mb-6">
-                Retrouvez-nous dans notre boulangerie traditionnelle au cœur de Souffelweyersheim.
-                Notre équipe vous accueille chaleureusement du mardi au dimanche.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-boulangerie-or mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Adresse</h3>
-                    <p className="text-boulangerie-or-light text-sm">
-                      2 rue du centre<br />
-                      67460 Souffelweyersheim
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Phone className="h-5 w-5 text-boulangerie-or mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Téléphone</h3>
-                    <p className="text-boulangerie-or-light text-sm">
-                      03 88 20 09 89
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Clock className="h-5 w-5 text-boulangerie-or mt-1 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold mb-1">Horaires</h3>
-                    <p className="text-boulangerie-or-light text-sm">
-                      Lu-Ve: 6h00 - 19h00<br />
-                      Sa: 6h00 - 13h00<br />
-                      Fermé le dimanche
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   )
 }

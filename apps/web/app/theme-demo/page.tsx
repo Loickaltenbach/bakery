@@ -3,13 +3,18 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@workspace/ui/components/card'
 import { Button } from '@workspace/ui/components/button'
+import { Logo } from '@/components/ui/logo'
+import { LogoIcon } from '@/components/ui/logo-icon'
 
 export default function ThemeDemoPage(): React.JSX.Element {
   return (
     <div className="min-h-screen bg-boulangerie-cream dark:bg-boulangerie-dark-bg-primary p-8">
       <div className="max-w-6xl mx-auto space-y-8">
-        {/* En-tête */}
+        {/* En-tête avec logo */}
         <div className="text-center mb-12">
+          <div className="flex justify-center mb-6">
+            <Logo size="xl" showText={true} />
+          </div>
           <h1 className="text-4xl font-artisan font-bold text-boulangerie-bordeaux dark:text-boulangerie-or-light mb-4">
             Démonstration du Thème Bordeaux
           </h1>
@@ -17,6 +22,58 @@ export default function ThemeDemoPage(): React.JSX.Element {
             Nouveau thème avec contraste élevé et mise en avant des couleurs bordeaux et or
           </p>
         </div>
+
+        {/* Section Logo */}
+        <Card className="card-boulangerie">
+          <CardHeader>
+            <CardTitle className="text-boulangerie-bordeaux dark:text-boulangerie-or-light">
+              Logos et Identité Visuelle
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Logo complet */}
+              <div className="text-center space-y-4">
+                <h3 className="font-semibold text-boulangerie-bordeaux">Logo Complet</h3>
+                <div className="flex flex-col space-y-4 items-center">
+                  <Logo size="sm" showText={true} />
+                  <Logo size="md" showText={true} />
+                  <Logo size="lg" showText={true} />
+                </div>
+              </div>
+
+              {/* Logo seul */}
+              <div className="text-center space-y-4">
+                <h3 className="font-semibold text-boulangerie-bordeaux">Logo Seul</h3>
+                <div className="flex flex-col space-y-4 items-center">
+                  <Logo size="sm" showText={false} />
+                  <Logo size="md" showText={false} />
+                  <Logo size="lg" showText={false} />
+                </div>
+              </div>
+
+              {/* Icônes SVG */}
+              <div className="text-center space-y-4">
+                <h3 className="font-semibold text-boulangerie-bordeaux">Icônes SVG</h3>
+                <div className="flex flex-col space-y-4 items-center">
+                  <LogoIcon size={32} />
+                  <LogoIcon size={48} />
+                  <LogoIcon size={64} />
+                </div>
+              </div>
+            </div>
+
+            {/* Variantes */}
+            <div className="mt-8 p-6 bg-boulangerie-bordeaux rounded-lg">
+              <h3 className="font-semibold text-white mb-4">Variantes sur fond sombre</h3>
+              <div className="flex flex-wrap gap-6 items-center justify-center">
+                <Logo size="sm" showText={true} variant="white" />
+                <Logo size="md" showText={true} variant="white" />
+                <Logo size="lg" showText={false} variant="white" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Palette de couleurs */}
         <Card className="card-boulangerie">

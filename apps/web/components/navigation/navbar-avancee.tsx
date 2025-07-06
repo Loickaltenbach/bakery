@@ -23,6 +23,7 @@ import { useFavoris } from '@/contexts/FavorisContext'
 import { useCommandesRapides } from '@/contexts/CommandesRapidesContext'
 import { useOffline } from '@/contexts/OfflineContext'
 import { usePanier } from '@/contexts/PanierContext'
+import { Logo } from '@/components/ui/logo'
 import { cn } from '@workspace/ui/lib/utils'
 
 interface NavItem {
@@ -92,18 +93,17 @@ export function NavbarAvancee() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <Link 
-              href="/" 
-              className="flex items-center space-x-2 text-boulangerie-bordeaux transition-colors hover:text-boulangerie-or dark:text-boulangerie-cream dark:hover:text-boulangerie-or-light"
-              aria-label="Retour à l'accueil"
-            >
-              <div className="h-8 w-8 rounded-full bg-gradient-bordeaux-or flex items-center justify-center shadow-bordeaux">
-                <span className="text-white font-bold text-sm">B</span>
-              </div>
-              <span className="hidden font-artisan text-xl font-semibold sm:block">
-                Boulangerie Artisanale
-              </span>
-            </Link>
+            <Logo 
+              size="sm" 
+              showText={false}
+              className="sm:hidden"
+            />
+            
+            <Logo 
+              size="md" 
+              showText={true}
+              className="hidden sm:flex"
+            />
 
             {/* Navigation desktop */}
             <div className="hidden md:flex items-center space-x-8">
