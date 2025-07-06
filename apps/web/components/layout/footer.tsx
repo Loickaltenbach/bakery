@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { 
@@ -16,6 +16,93 @@ import { Logo } from '@/components/ui/logo'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const [currentTime, setCurrentTime] = useState(new Date())
+
+  // Mise à jour de l'heure chaque minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000) // Mise à jour chaque minute
+
+    return () => clearInterval(timer)
+  }, [])
+
+  // Fonction pour calculer le statut d'ouverture
+  const getOpeningStatus = () => {
+    const now = currentTime
+    const currentDay = now.getDay() // 0 = Dimanche, 1 = Lundi, etc.
+    const currentHour = now.getHours()
+    const currentMinute = now.getMinutes()
+    const currentTimeMinutes = currentHour * 60 + currentMinute
+
+    // Horaires de la boulangerie
+    const schedule: Record<number, { open: number; close: number } | null> = {
+      1: { open: 6 * 60, close: 19 * 60 }, // Lundi: 6h00 - 19h00
+      2: { open: 6 * 60, close: 19 * 60 }, // Mardi: 6h00 - 19h00
+      3: { open: 6 * 60, close: 19 * 60 }, // Mercredi: 6h00 - 19h00
+      4: { open: 6 * 60, close: 19 * 60 }, // Jeudi: 6h00 - 19h00
+      5: { open: 6 * 60, close: 19 * 60 }, // Vendredi: 6h00 - 19h00
+      6: { open: 6 * 60, close: 13 * 60 }, // Samedi: 6h00 - 13h00
+      0: null, // Dimanche: fermé
+    }
+
+    const todaySchedule = schedule[currentDay]
+
+    // Si fermé le dimanche
+    if (!todaySchedule) {
+      return {
+        status: 'closed',
+        message: 'Fermé aujourd\'hui',
+        color: 'text-red-400',
+        bgColor: 'bg-red-400'
+      }
+    }
+
+    const { open, close } = todaySchedule
+
+    // Si avant l'ouverture
+    if (currentTimeMinutes < open) {
+      const openHour = Math.floor(open / 60)
+      const openMinute = open % 60
+      return {
+        status: 'closed',
+        message: `Ouvre à ${openHour}h${openMinute.toString().padStart(2, '0')}`,
+        color: 'text-red-400',
+        bgColor: 'bg-red-400'
+      }
+    }
+
+    // Si après la fermeture
+    if (currentTimeMinutes >= close) {
+      return {
+        status: 'closed',
+        message: 'Fermé aujourd\'hui',
+        color: 'text-red-400',
+        bgColor: 'bg-red-400'
+      }
+    }
+
+    // Si ferme dans moins de 30 minutes
+    const minutesUntilClose = close - currentTimeMinutes
+    if (minutesUntilClose <= 30) {
+      return {
+        status: 'closing_soon',
+        message: `Ferme dans ${minutesUntilClose} min`,
+        color: 'text-orange-400',
+        bgColor: 'bg-orange-400'
+      }
+    }
+
+    // Ouvert normalement
+    return {
+      status: 'open',
+      message: 'Ouvert aujourd\'hui',
+      color: 'text-green-400',
+      bgColor: 'bg-green-400'
+    }
+  }
+
+  const openingStatus = getOpeningStatus()
 
   const footerLinks = {
     navigation: [
@@ -135,9 +222,9 @@ export function Footer() {
               </p>
             </div>
             <div className="mt-4">
-              <span className="inline-flex items-center gap-1 text-xs text-green-400">
-                <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                Ouvert aujourd'hui
+              <span className={`inline-flex items-center gap-1 text-xs ${openingStatus.color}`}>
+                <div className={`w-2 h-2 ${openingStatus.bgColor} rounded-full animate-pulse`}></div>
+                {openingStatus.message}
               </span>
             </div>
           </div>

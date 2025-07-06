@@ -148,10 +148,6 @@ export function HomePage() {
           <div className="w-64 h-64 bg-gradient-to-br from-boulangerie-or/25 to-boulangerie-or-light/20 rounded-full blur-3xl"></div>
         </motion.div>
 
-        {/* Logo */}
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-          <Logo size="xl" showText={false} className="w-32 sm:w-40 lg:w-48" />
-        </div>
       </section>
 
       {/* Section Caractéristiques */}
