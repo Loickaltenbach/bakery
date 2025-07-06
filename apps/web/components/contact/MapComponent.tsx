@@ -44,12 +44,12 @@ export default function MapComponent() {
             </p>
             <div className="mt-2">
               <a
-                href="https://maps.google.com/?q=2+rue+du+centre,+67460+Souffelweyersheim"
+                href="https://www.google.com/maps/search/Boulangerie+Fabrice+2+rue+du+centre+67460+Souffelweyersheim"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-boulangerie-or hover:text-boulangerie-or-dark underline"
               >
-                Ouvrir dans Google Maps
+                Voir notre fiche établissement
               </a>
             </div>
           </div>
