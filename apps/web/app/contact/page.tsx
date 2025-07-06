@@ -5,28 +5,29 @@ import { motion } from "framer-motion"
 import { NavbarAvancee } from "@/components/navigation/navbar-avancee"
 import { HeroContact } from "@/components/contact/HeroContact"
 import { FormulaireContact } from "@/components/contact/FormulaireContact"
+import { CarteLocalisation } from "@/components/contact/CarteLocalisation"
 import { MapPin, Phone, Clock, Mail } from "lucide-react"
 
 const informationsContact = [
   {
     icon: MapPin,
     titre: "Adresse",
-    contenu: "15 Rue de la Boulangerie\n67000 Strasbourg, France"
+    contenu: "2 rue du centre\n67460 Souffelweyersheim, France"
   },
   {
     icon: Phone,
     titre: "Téléphone",
-    contenu: "+33 3 88 XX XX XX"
+    contenu: "+33 3 88 20 09 89"
   },
   {
     icon: Mail,
     titre: "Email",
-    contenu: "contact@boulangerie-tradition.fr"
+    contenu: "fabricebk@yahoo.fr"
   },
   {
     icon: Clock,
     titre: "Horaires",
-    contenu: "Lun-Sam: 7h00 - 19h00\nDimanche: 7h00 - 13h00"
+    contenu: "Lun-Ven: 6h00 - 19h00\nSamedi: 6h00 - 13h00"
   }
 ]
 
@@ -73,18 +74,8 @@ export default function ContactPage(): JSX.Element {
                   ))}
                 </div>
 
-                {/* Carte (placeholder) */}
-                <motion.div 
-                  className="mt-8 bg-white rounded-lg shadow-md p-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <h3 className="font-semibold text-gray-900 mb-4">Nous trouver</h3>
-                  <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
-                    <p className="text-gray-500">Carte à intégrer</p>
-                  </div>
-                </motion.div>
+                {/* Carte interactive */}
+                <CarteLocalisation className="mt-8" />
               </div>
             </div>
           </div>
