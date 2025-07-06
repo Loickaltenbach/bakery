@@ -18,6 +18,7 @@ export { useContact } from './useContact';
 export { useCommandesRapidesLogic } from './useCommandesRapidesLogic';
 export { useRecherche } from './useRecherche';
 export { useRechercheSimple } from './useRechercheSimple';
+export { useCompte } from './useCompte';
 
 // Hooks admin
 export { useAdminAccess } from './useAdminAccess';

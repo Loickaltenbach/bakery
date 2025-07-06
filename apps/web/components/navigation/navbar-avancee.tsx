@@ -35,19 +35,27 @@ const navItems: NavItem[] = [
   { label: 'Accueil', href: '/' },
   { label: 'Produits', href: '/produits' },
   { label: 'Commandes', href: '/commandes' },
-  { label: 'Contact', href: '/contact' }
+  { label: 'Contact', href: '/contact' },
+  { label: 'Mon Compte', href: '/compte' }
 ]
 
 export function NavbarAvancee() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false)
   const [isCommandesRapidesOpen, setIsCommandesRapidesOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  
   const pathname = usePathname()
   const { theme, setTheme } = useTheme()
   const { favoris } = useFavoris()
   const { commandesRapides } = useCommandesRapides()
   const { isOnline, offlineData, syncData } = useOffline()
   const { panier } = usePanier()
+
+  // Éviter les problèmes d'hydratation
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const themeMenuRef = useRef<HTMLDivElement>(null)
   const commandesMenuRef = useRef<HTMLDivElement>(null)
@@ -75,8 +83,70 @@ export function NavbarAvancee() {
     }
   }
 
-  const totalItems = panier.items.reduce((sum: number, item: any) => sum + item.quantite, 0)
-  const actionsEnAttenteCount = offlineData.commandesEnAttente.length
+  const totalItems = mounted ? panier.items.reduce((sum: number, item: any) => sum + item.quantite, 0) : 0
+  const actionsEnAttenteCount = mounted ? offlineData.commandesEnAttente.length : 0
+
+  // Ne pas rendre avant l'hydratation
+  if (!mounted) {
+    return (
+      <nav className="sticky top-0 z-50 w-full border-b border-boulangerie-gold/20 bg-white/95 backdrop-blur-sm transition-all duration-300 dark:border-amber-500/20 dark:bg-boulangerie-marron/95">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            {/* Logo */}
+            <Link 
+              href="/" 
+              className="flex items-center space-x-2 text-boulangerie-marron transition-colors hover:text-boulangerie-gold dark:text-amber-100 dark:hover:text-amber-300"
+              aria-label="Retour à l'accueil"
+            >
+              <div className="h-8 w-8 rounded-full bg-gradient-to-br from-boulangerie-gold to-amber-600 flex items-center justify-center">
+                <span className="text-white font-bold text-sm">B</span>
+              </div>
+              <span className="hidden font-artisan text-xl font-semibold sm:block">
+                Boulangerie Artisanale
+              </span>
+            </Link>
+
+            {/* Navigation desktop */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-boulangerie-gold dark:hover:text-amber-300",
+                    pathname === item.href
+                      ? "text-boulangerie-gold dark:text-amber-300"
+                      : "text-boulangerie-marron dark:text-amber-100"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+
+            {/* Actions skeleton */}
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="rounded-full p-2">
+                <Search className="h-5 w-5" />
+              </div>
+              <div className="rounded-full p-2">
+                <Heart className="h-5 w-5" />
+              </div>
+              <div className="rounded-full p-2">
+                <ShoppingCart className="h-5 w-5" />
+              </div>
+              <div className="rounded-full p-2">
+                <User className="h-5 w-5" />
+              </div>
+              <button className="md:hidden rounded-full p-2">
+                <Menu className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    )
+  }
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-boulangerie-gold/20 bg-white/95 backdrop-blur-sm transition-all duration-300 dark:border-amber-500/20 dark:bg-boulangerie-marron/95">
@@ -145,7 +215,7 @@ export function NavbarAvancee() {
             )}
 
             {/* Recherche */}
-            <Link
+            <Link 
               href="/recherche"
               className="rounded-full p-2 text-boulangerie-marron transition-colors hover:bg-boulangerie-gold/10 hover:text-boulangerie-gold dark:text-amber-100 dark:hover:bg-amber-500/10 dark:hover:text-amber-300"
               aria-label="Rechercher des produits"

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { useAdminAccess } from '@/hooks/useAdminAccess';
 import { AdminLoading } from '@/components/admin/AdminLoading';
 import { AdminLoginRequired } from '@/components/admin/AdminLoginRequired';
@@ -8,7 +8,7 @@ import { AdminAccessDenied } from '@/components/admin/AdminAccessDenied';
 import { AdminHeader } from '@/components/admin/AdminHeader';
 
 interface AdminLayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
