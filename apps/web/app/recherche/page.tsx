@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import { NavbarAvancee } from "@/components/navigation/navbar-avancee"
 import { useRechercheSimple } from "@/hooks/useRechercheSimple"
@@ -12,6 +12,8 @@ import { CategoriesFiltre } from "@/components/recherche/CategoriesFiltre"
 import { EnTeteResultats } from "@/components/recherche/EnTeteResultats"
 import { GrilleProduitsRecherche } from "@/components/recherche/GrilleProduitsRecherche"
 import { AucunResultat } from "@/components/recherche/AucunResultat"
+
+const PRODUITS_PAR_PAGE = 12
 
 export default function RechercheePage(): React.ReactElement {
   const {
@@ -36,6 +38,11 @@ export default function RechercheePage(): React.ReactElement {
     selectionnerRecherchePopulaire,
     toggleFiltres
   } = useRechercheSimple()
+
+  const [page, setPage] = useState(1)
+
+  const produitsPage = useMemo(() => produitsFiltres.slice((page - 1) * PRODUITS_PAR_PAGE, page * PRODUITS_PAR_PAGE), [produitsFiltres, page])
+  const totalPages = Math.ceil(produitsFiltres.length / PRODUITS_PAR_PAGE)
 
   return (
     <>
@@ -88,9 +95,38 @@ export default function RechercheePage(): React.ReactElement {
               nombreResultats={produitsFiltres.length}
               recherche={recherche}
             />
-
             {produitsFiltres.length > 0 ? (
-              <GrilleProduitsRecherche produits={produitsFiltres} />
+              <>
+                <GrilleProduitsRecherche produits={produitsPage} />
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center mt-8 gap-2">
+                    <button
+                      className="px-3 py-1 rounded bg-boulangerie-gold text-white disabled:opacity-50"
+                      onClick={() => setPage(page - 1)}
+                      disabled={page === 1}
+                    >
+                      Précédent
+                    </button>
+                    {Array.from({ length: totalPages }, (_, i) => (
+                      <button
+                        key={i}
+                        className={`px-3 py-1 rounded ${page === i + 1 ? 'bg-boulangerie-bordeaux text-white' : 'bg-white text-boulangerie-bordeaux border'} border-boulangerie-bordeaux`}
+                        onClick={() => setPage(i + 1)}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
+                    <button
+                      className="px-3 py-1 rounded bg-boulangerie-gold text-white disabled:opacity-50"
+                      onClick={() => setPage(page + 1)}
+                      disabled={page === totalPages}
+                    >
+                      Suivant
+                    </button>
+                  </div>
+                )}
+              </>
             ) : (
               <AucunResultat />
             )}

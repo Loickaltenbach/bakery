@@ -10,26 +10,21 @@ export function useCategories() {
     try {
       setLoading(true)
       setError(null)
-      
-      const response = await boulangerieAPI.categories.getAll()
-      
-      if ((response as any).success) {
-        // Ajouter la catégorie "Tous"
-        const toutesCategories = [
-          { 
-            id: "tous", 
-            nom: "Tous nos produits", 
-            icon: "🍽️", 
-            description: "", 
-            produits_count: 0, 
-            actif: true 
-          },
-          ...(response as any).data
-        ]
-        setCategories(toutesCategories)
-      } else {
-        throw new Error('Erreur lors du chargement des catégories')
-      }
+      // Appel API réel KISS
+      const data = await boulangerieAPI.categories.getAll()
+      // Ajouter la catégorie "Tous"
+      const toutesCategories = [
+        { 
+          id: "tous", 
+          nom: "Tous nos produits", 
+          icon: "🍽️", 
+          description: "", 
+          produits_count: 0, 
+          actif: true 
+        },
+        ...(Array.isArray(data) ? data : [])
+      ]
+      setCategories(toutesCategories)
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Erreur lors du chargement'
       setError(message)

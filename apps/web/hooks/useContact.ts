@@ -16,14 +16,9 @@ export function useContact() {
       setLoading(true)
       setError(null)
       setSuccess(false)
-      
-      const response = await boulangerieAPI.contact.send(message)
-      
-      if ((response as any).success) {
-        setSuccess(true)
-      } else {
-        throw new Error('Erreur lors de l\'envoi du message')
-      }
+      // Appel API réel KISS
+      await boulangerieAPI.contact.send(message)
+      setSuccess(true)
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Erreur lors de l\'envoi'
       setError(message)

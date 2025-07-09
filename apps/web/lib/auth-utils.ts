@@ -9,6 +9,7 @@ import {
   StatistiquesUtilisateur,
   CommandeUtilisateur
 } from './auth-types';
+import { validerEmail, validerPassword, validerNomPrenom, validerTelephone } from './validation-utils';
 
 // Configuration par défaut
 const SESSION_STORAGE_KEY = 'boulangerie_session';
@@ -63,61 +64,42 @@ export function verifierpassword(password: string, hash: string): boolean {
 }
 
 // Validation des données
-export function validerEmail(email: string): { valide: boolean; erreur?: string } {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return { valide: false, erreur: 'Format d\'email invalide' };
-  }
-  return { valide: true };
-}
-
-export function validerpassword(password: string): { valide: boolean; erreurs: string[] } {
-  const erreurs: string[] = [];
-  
-  if (password.length < 6) {
-    erreurs.push('Le mot de passe doit contenir au moins 6 caractères');
-  }
-  if (!/[A-Z]/.test(password)) {
-    erreurs.push('Le mot de passe doit contenir au moins une majuscule');
-  }
-  if (!/[0-9]/.test(password)) {
-    erreurs.push('Le mot de passe doit contenir au moins un chiffre');
-  }
-  
-  return { valide: erreurs.length === 0, erreurs };
-}
-
 export function validerInformationsInscription(infos: InformationsInscription): { valide: boolean; erreurs: string[] } {
   const erreurs: string[] = [];
-  
+
   // Validation email
   const validationEmail = validerEmail(infos.email);
   if (!validationEmail.valide) {
     erreurs.push(validationEmail.erreur!);
   }
-  
+
   // Vérifier si l'email existe déjà
   if (utilisateursDB.find(u => u.email === infos.email)) {
     erreurs.push('Cet email est déjà utilisé');
   }
-  
+
   // Validation mot de passe
-  const validationMdp = validerpassword(infos.password);
+  const validationMdp = validerPassword(infos.password);
   if (!validationMdp.valide) {
     erreurs.push(...validationMdp.erreurs);
   }
-  
+
   // Confirmation mot de passe
   if (infos.password !== infos.confirmationpassword) {
     erreurs.push('Les mots de passe ne correspondent pas');
   }
-  
+
   // Champs obligatoires
-  if (!infos.nom.trim()) erreurs.push('Le nom est obligatoire');
-  if (!infos.prenom.trim()) erreurs.push('Le prénom est obligatoire');
-  if (!infos.telephone.trim()) erreurs.push('Le téléphone est obligatoire');
+  const validationNomPrenom = validerNomPrenom(infos.nom, infos.prenom);
+  if (!validationNomPrenom.valide) {
+    erreurs.push(...validationNomPrenom.erreurs);
+  }
+  const validationTel = validerTelephone(infos.telephone);
+  if (!validationTel.valide) {
+    erreurs.push(validationTel.erreur!);
+  }
   if (!infos.accepteConditions) erreurs.push('Vous devez accepter les conditions d\'utilisation');
-  
+
   return { valide: erreurs.length === 0, erreurs };
 }
 

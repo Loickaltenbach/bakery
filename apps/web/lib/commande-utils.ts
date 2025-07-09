@@ -11,6 +11,7 @@ import {
 } from './commande-types';
 import { PanierItem } from './panier-types';
 import { formaterPrix } from './panier-utils';
+import { validerEmail, validerTelephone, validerNomPrenom } from './validation-utils';
 
 // Configuration par défaut
 export const CONFIGURATION_DEFAUT: ConfigurationCommande = {
@@ -163,24 +164,24 @@ export function validerInformationsClient(
   infos: Partial<InformationsClient>
 ): { valide: boolean; erreurs: string[] } {
   const erreurs: string[] = [];
-  
-  if (!infos.nom?.trim()) erreurs.push('Le nom est obligatoire');
-  if (!infos.prenom?.trim()) erreurs.push('Le prénom est obligatoire');
-  if (!infos.telephone?.trim()) erreurs.push('Le téléphone est obligatoire');
-  if (!infos.email?.trim()) erreurs.push('L\'email est obligatoire');
-  
-  // Validation email simple
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (infos.email && !emailRegex.test(infos.email)) {
-    erreurs.push('L\'email n\'est pas valide');
+
+  if (!infos.nom || !infos.prenom) {
+    const validationNomPrenom = validerNomPrenom(infos.nom || '', infos.prenom || '');
+    if (!validationNomPrenom.valide) erreurs.push(...validationNomPrenom.erreurs);
   }
-  
-  // Validation téléphone français simple
-  const telRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
-  if (infos.telephone && !telRegex.test(infos.telephone.replace(/\s/g, ''))) {
-    erreurs.push('Le numéro de téléphone n\'est pas valide');
+  if (!infos.telephone) {
+    erreurs.push('Le téléphone est obligatoire');
+  } else {
+    const validationTel = validerTelephone(infos.telephone);
+    if (!validationTel.valide) erreurs.push(validationTel.erreur!);
   }
-  
+  if (!infos.email) {
+    erreurs.push("L'email est obligatoire");
+  } else {
+    const validationEmail = validerEmail(infos.email);
+    if (!validationEmail.valide) erreurs.push(validationEmail.erreur!);
+  }
+
   return { valide: erreurs.length === 0, erreurs };
 }
 

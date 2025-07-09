@@ -25,58 +25,10 @@ import {
   StatutUtilisateur 
 } from '@/lib/auth-types';
 import { formatDate } from '@/lib/format-utils';
+import { ErreurReseau } from '../ui/ErreurReseau';
+import { boulangerieAPI } from '@/lib/boulangerie-api';
 
-// Données de test pour les utilisateurs
-const utilisateursTest: Utilisateur[] = [
-  {
-    id: '1',
-    email: 'marie.martin@email.com',
-    nom: 'Martin',
-    prenom: 'Marie',
-    telephone: '06 12 34 56 78',
-    dateCreation: new Date('2024-01-15'),
-    dateMiseAJour: new Date('2024-01-20'),
-    role: RoleUtilisateur.CLIENT,
-    statut: StatutUtilisateur.ACTIF,
-    adressesSauvegardees: []
-  },
-  {
-    id: '2',
-    email: 'hans.mueller@boulangerie.com',
-    nom: 'Müller',
-    prenom: 'Hans',
-    telephone: '06 87 65 43 21',
-    dateCreation: new Date('2023-06-01'),
-    dateMiseAJour: new Date('2024-01-18'),
-    role: RoleUtilisateur.EMPLOYE,
-    statut: StatutUtilisateur.ACTIF,
-    adressesSauvegardees: []
-  },
-  {
-    id: '3',
-    email: 'admin@boulangerie.com',
-    nom: 'Schmidt',
-    prenom: 'Anna',
-    telephone: '06 11 22 33 44',
-    dateCreation: new Date('2023-01-01'),
-    dateMiseAJour: new Date('2024-01-19'),
-    role: RoleUtilisateur.ADMIN,
-    statut: StatutUtilisateur.ACTIF,
-    adressesSauvegardees: []
-  },
-  {
-    id: '4',
-    email: 'pierre.durand@email.com',
-    nom: 'Durand',
-    prenom: 'Pierre',
-    telephone: '06 99 88 77 66',
-    dateCreation: new Date('2024-01-10'),
-    dateMiseAJour: new Date('2024-01-16'),
-    role: RoleUtilisateur.CLIENT,
-    statut: StatutUtilisateur.INACTIF,
-    adressesSauvegardees: []
-  }
-];
+// Données de test pour les utilisateurs (supprimé)
 
 const getRoleLabel = (role: RoleUtilisateur): string => {
   switch (role) {
@@ -167,6 +119,7 @@ export default function GestionUtilisateurs() {
   const [filtrageStatut, setFiltrageStatut] = useState<string>('tous');
   const [chargement, setChargement] = useState<boolean>(false);
   const [afficherDetails, setAfficherDetails] = useState<boolean>(false);
+  const [erreurReseau, setErreurReseau] = useState<string | null>(null);
 
   // Charger les utilisateurs
   useEffect(() => {
@@ -209,16 +162,17 @@ export default function GestionUtilisateurs() {
     setUtilisateursFiltered(utilisateursFiltres);
   }, [utilisateurs, filtrageRole, filtrageStatut, recherche]);
 
-  const chargerUtilisateurs = () => {
+  const chargerUtilisateurs = async () => {
     setChargement(true);
+    setErreurReseau(null);
     try {
-      // Simulation - en production, appel API
-      setTimeout(() => {
-        setUtilisateurs(utilisateursTest);
-        setChargement(false);
-      }, 500);
-    } catch (error) {
-      console.error('Erreur lors du chargement des utilisateurs:', error);
+      // Appel API réel KISS
+      const data = await boulangerieAPI.utilisateurs.getAll();
+      // On suppose que l'API retourne un tableau d'utilisateurs
+      setUtilisateurs(Array.isArray(data) ? data : []);
+      setChargement(false);
+    } catch (error: any) {
+      setErreurReseau(error.message || 'Erreur réseau : impossible de charger les utilisateurs.');
       setChargement(false);
     }
   };
@@ -577,6 +531,11 @@ export default function GestionUtilisateurs() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Fallback erreur réseau KISS */}
+      {erreurReseau && (
+        <ErreurReseau message={erreurReseau} onRetry={chargerUtilisateurs} />
       )}
     </div>
   );

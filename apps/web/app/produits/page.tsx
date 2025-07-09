@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import { NavbarAvancee } from "@/components/navigation/navbar-avancee"
 import { useProduits } from "@/hooks/useProduits"
@@ -13,11 +13,14 @@ import { GrilleProduits } from "@/components/produits/GrilleProduits"
 import { ChargementProduits } from "@/components/produits/ChargementProduits"
 import { ErreurChargement } from "@/components/produits/ErreurChargement"
 
-export default function ProduitsPage(): JSX.Element {
+const PRODUITS_PAR_PAGE = 12
+
+export default function ProduitsPage(): React.ReactElement {
   // Hooks pour la logique
   const { produits, loading: loadingProduits, error: errorProduits, refetch: refetchProduits } = useProduits()
   const { categories, loading: loadingCategories } = useCategories()
   const { categorieActive, setCategorieActive, recherche, setRecherche, resetFiltres } = useFiltres()
+  const [page, setPage] = useState(1)
 
   // Filtrage des produits (logique simple)
   const produitsFiltres = useMemo(() => {
@@ -31,6 +34,9 @@ export default function ProduitsPage(): JSX.Element {
       return matchCategorie && matchRecherche
     })
   }, [produits, categorieActive, recherche])
+
+  const produitsPage = produitsFiltres.slice((page - 1) * PRODUITS_PAR_PAGE, page * PRODUITS_PAR_PAGE)
+  const totalPages = Math.ceil(produitsFiltres.length / PRODUITS_PAR_PAGE)
 
   // Gestion des erreurs
   if (errorProduits) {
@@ -80,8 +86,37 @@ export default function ProduitsPage(): JSX.Element {
               <ChargementProduits />
             ) : (
               <>
-                <GrilleProduits produits={produitsFiltres} />
+                <GrilleProduits produits={produitsPage} />
                 
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center mt-8 gap-2">
+                    <button
+                      className="px-3 py-1 rounded bg-boulangerie-gold text-white disabled:opacity-50"
+                      onClick={() => setPage(page - 1)}
+                      disabled={page === 1}
+                    >
+                      Précédent
+                    </button>
+                    {Array.from({ length: totalPages }, (_, i) => (
+                      <button
+                        key={i}
+                        className={`px-3 py-1 rounded ${page === i + 1 ? 'bg-boulangerie-bordeaux text-white' : 'bg-white text-boulangerie-bordeaux border'} border-boulangerie-bordeaux`}
+                        onClick={() => setPage(i + 1)}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
+                    <button
+                      className="px-3 py-1 rounded bg-boulangerie-gold text-white disabled:opacity-50"
+                      onClick={() => setPage(page + 1)}
+                      disabled={page === totalPages}
+                    >
+                      Suivant
+                    </button>
+                  </div>
+                )}
+
                 {produitsFiltres.length === 0 && produits.length > 0 && (
                   <motion.div 
                     className="text-center py-12"

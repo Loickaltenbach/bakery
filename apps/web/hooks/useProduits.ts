@@ -20,14 +20,9 @@ export function useProduits(options: UseProduitsOptions = {}) {
     try {
       setLoading(true)
       setError(null)
-      
-      const response = await boulangerieAPI.produits.getAll(filtres)
-      
-      if ((response as any).success) {
-        setProduits((response as any).data)
-      } else {
-        throw new Error('Erreur lors du chargement des produits')
-      }
+      // Appel API réel KISS
+      const data = await boulangerieAPI.produits.getAll(filtres)
+      setProduits(Array.isArray(data) ? data : [])
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Erreur lors du chargement'
       setError(message)

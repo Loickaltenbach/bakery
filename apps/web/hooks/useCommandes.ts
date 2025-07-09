@@ -15,14 +15,9 @@ export function useCommandes() {
     try {
       setLoading(true)
       setError(null)
-      
-      const response = await boulangerieAPI.commandes.getAll(filtres)
-      
-      if ((response as any).success) {
-        setCommandes((response as any).data)
-      } else {
-        throw new Error('Erreur lors du chargement des commandes')
-      }
+      // Appel API réel KISS
+      const data = await boulangerieAPI.commandes.getAll(filtres)
+      setCommandes(Array.isArray(data) ? data : [])
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Erreur lors du chargement'
       setError(message)

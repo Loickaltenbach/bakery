@@ -175,6 +175,28 @@ class BoulangerieAPI {
     // Récupérer les statistiques générales
     getAll: (periode = '30j') => this.request(`/stats?periode=${periode}`),
   }
+
+  // API Utilisateurs
+  utilisateurs = {
+    // Récupérer tous les utilisateurs
+    getAll: () => this.request('/utilisateurs'),
+    // Récupérer un utilisateur par ID
+    getById: (id: string) => this.request(`/utilisateurs/${id}`),
+    // Créer un utilisateur
+    create: (utilisateur: any) => this.request('/utilisateurs', {
+      method: 'POST',
+      body: JSON.stringify(utilisateur),
+    }),
+    // Mettre à jour un utilisateur
+    update: (id: string, utilisateur: any) => this.request(`/utilisateurs/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(utilisateur),
+    }),
+    // Supprimer un utilisateur
+    delete: (id: string) => this.request(`/utilisateurs/${id}`, {
+      method: 'DELETE',
+    }),
+  }
 }
 
 // Instance singleton

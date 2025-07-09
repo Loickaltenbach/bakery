@@ -1,6 +1,6 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { motion } from "framer-motion"
-import { ProduitCard } from "./ProduitCard"
+const ProduitCardLazy = React.lazy(() => import("./ProduitCard").then(m => ({ default: m.ProduitCard })))
 import { type Produit } from "@/lib/boulangerie-api"
 
 interface GrilleProduits {
@@ -29,9 +29,11 @@ export function GrilleProduits({ produits }: GrilleProduits) {
       animate={{ opacity: 1 }}
       transition={{ delay: 0.4 }}
     >
-      {produits.map((produit, index) => (
-        <ProduitCard key={produit.id} produit={produit} index={index} />
-      ))}
+      <Suspense fallback={<div className="py-12 text-center">Chargement...</div>}>
+        {produits.map((produit, index) => (
+          <ProduitCardLazy key={produit.id} produit={produit} index={index} />
+        ))}
+      </Suspense>
     </motion.div>
   )
 }

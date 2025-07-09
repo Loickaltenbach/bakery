@@ -2,11 +2,14 @@
 
 import React from 'react';
 import InterfaceAdmin from '@/components/admin/InterfaceAdmin';
+import { RequireRole } from '@/components/auth/RequireRole';
 
 export default function AdminPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <InterfaceAdmin />
-    </div>
+    <RequireRole role="ADMIN">
+      <div className="min-h-screen bg-gray-50">
+        <InterfaceAdmin />
+      </div>
+    </RequireRole>
   );
 }
